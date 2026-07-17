@@ -1,6 +1,6 @@
 # ModpackUpdateManager
 
-Electron app to manage Minecraft modpack updates.  
+QtQuick app to manage Minecraft modpack updates.  
 Provides services for both users and modpack authors.
 
 Designed to avoid removing any additional mods added by players.
