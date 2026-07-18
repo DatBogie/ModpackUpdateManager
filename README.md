@@ -7,7 +7,7 @@ Designed to avoid removing any additional mods added by players.
 
 > [!Note]
 > All features are currently planned and are not yet included.  
-> *(In case that wasn't obvious from this being a blank repo!)*
+> This is my first ever QtQuick/QML project, so I'm very much learning as I go! (Progress will be rather slow.)
 
 ## Features (Users)
 
