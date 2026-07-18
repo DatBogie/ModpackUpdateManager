@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/src">/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/src</file>
+
+  </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/src/">
+    <file alias="Main.qml">/home/dat-bogie/ModpackUpdateManager/src/Main.qml</file>
+  </qresource>
+</RCC>
+

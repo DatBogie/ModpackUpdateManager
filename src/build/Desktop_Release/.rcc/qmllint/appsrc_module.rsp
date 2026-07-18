@@ -1,0 +1,14 @@
+-I
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release
+-I
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/src
+-I
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release
+-I
+/usr/lib/qt6/qml
+--resource
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/.qt/rcc/qmake_src.qrc
+--resource
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/.qt/rcc/appsrc_raw_qml_0.qrc
+--module
+src

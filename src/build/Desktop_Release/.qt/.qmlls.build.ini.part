@@ -1,0 +1,3 @@
+[<SLASH>home<SLASH>dat-bogie<SLASH>ModpackUpdateManager<SLASH>src]
+importPaths="/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release:/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/src:/usr/lib/qt6/qml"
+resourceFiles="/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/.qt/rcc/qmake_src.qrc:/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Release/.qt/rcc/appsrc_raw_qml_0.qrc"

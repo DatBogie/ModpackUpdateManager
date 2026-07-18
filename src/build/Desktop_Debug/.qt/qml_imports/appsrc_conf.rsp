@@ -1,0 +1,14 @@
+-rootPath
+/home/dat-bogie/ModpackUpdateManager/src
+-cmake-output
+-output-file
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/qml_imports/appsrc_conf.cmake
+-importPath
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug
+-importPath
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/src
+-importPath
+/usr/lib/qt6/qml
+-qrcFiles
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/qmake_src.qrc
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/appsrc_raw_qml_0.qrc
