@@ -6,5 +6,7 @@ struct ModpackInstance {
     QString name;
     QString thumbnailKey;
     QString thumbnailParentPath;
-    bool packEnabled = true;
+    bool packEnabled = false;
+    bool fromPrism = true;
+    bool isCompatible = false;
 };

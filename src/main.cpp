@@ -1,51 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QDir>
-#include <QDirIterator>
-#include <QFile>
 #include <QDebug>
 
-#include "modpackmodel.h"
-
-QString prismPath;
-ModpackModel model;
-
-void Update() {
-    QDirIterator iter(prismPath+"/instances");
-    while (iter.hasNext()) {
-        QString dir = iter.next();
-        if (dir.endsWith(".") || dir.endsWith("..") || !QDir(dir).exists()) continue;
-        QString name;
-        QString thumbKey;
-        QString thumbParentPath;
-        bool isCompatible = false;
-        QFile cfg = QFile(dir+"/instance.cfg");
-        if (cfg.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream in(&cfg);
-            while (!in.atEnd()) {
-                QString ln = in.readLine();
-                QStringList parts = ln.split('=');
-                if (parts.size() == 2) {
-                    QString key = parts[0].trimmed();
-                    QString val = parts[1].trimmed();
-                    if (key == "name")
-                        name = val;
-                    else if (key == "iconKey")
-                        thumbKey = val;
-                }
-            }
-        }
-        if (QDir(prismPath+"/icons/"+thumbKey).exists())
-            thumbParentPath = prismPath+"/icons/";
-        else {
-            thumbKey = "icon.png";
-            thumbParentPath = dir+"/minecraft/";
-        }
-        isCompatible = QFile(dir+"/.modpackupdatemanager.json").exists();
-        model.addInstance({ name, thumbKey, thumbParentPath, isCompatible });
-    }
-}
+#include "backend.h"
 
 int main(int argc, char *argv[])
 {
@@ -53,19 +11,25 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    #ifdef Q_OS_LINUX
-        prismPath = QDir::homePath()+"/.local/share/PrismLauncher";
-        if (!QDir(prismPath).exists())
-            prismPath = QDir::homePath()+"/.var/app/org.prismlauncher.PrismLauncher/data/PrismLauncher";
-    #elif defined(Q_OS_WIN)
-        prismPath = QDir::homePath()+"/AppData/Roaming/PrismLauncher";
-    #elif defined(Q_OS_MACOS)
-        prismPath = QDir::homePath()+"/Library/Application Support/PrismLauncher";
-    #endif
+    QCoreApplication::setOrganizationName("Dat Bogie");
+    QCoreApplication::setOrganizationDomain("datbogie.org");
+    QCoreApplication::setOrganizationName("Modpack Update Manager");
 
-    Update(); // Expose to QML
+    Backend backend;
+    QVariant ignoredInstances = backend.settings.value("IgnoredModpacks");
+    if (!ignoredInstances.isValid())
+        backend.settings.setValue("IgnoredModpacks", backend.ignoredInstances);
+    else
+        backend.ignoredInstances = ignoredInstances.toStringList();
 
-    engine.rootContext()->setContextProperty("modpackModel",&model);
+    backend.model.addInstance({"Homer Modpack", "giphy.gif", "/home/dat-bogie/Downloads/", true, false, true});
+    backend.model.addInstance({"External Modpack", "album_2025-08-04_00-20-32.gif", "/home/dat-bogie/Pictures/", false, false});
+
+    backend.findPrismPath();
+    backend.loadPrismInstances();
+
+    engine.rootContext()->setContextProperty("modpackModel",&backend.model);
+    engine.rootContext()->setContextProperty("backend",&backend);
 
     QObject::connect(
         &engine,

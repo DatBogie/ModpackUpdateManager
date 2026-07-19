@@ -48,16 +48,12 @@ ApplicationWindow {
     property real globalModpackScale: .85
     property int globalHeaderSize: 18
 
-    property string sPrismPath: "~/.local/share/PrismLauncher/instances/"
-
     color: window.crust
 
     Component {
         id: modpackGridItem
         Item {
             id: item
-            property bool isCompatible: false
-            property bool isEnabled: true
             width: modpackGrid.cellWidth
             height: modpackGrid.cellHeight
             Button {
@@ -99,10 +95,10 @@ ApplicationWindow {
                         }
                         color: window.surface0
 
-                        Image {
+                        AnimatedImage {
                             id: thumbnail
                             anchors.fill: parent
-                            fillMode: Image.PreserveAspectFit
+                            fillMode: sourceSize.width == sourceSize.height? Image.PreserveAspectFit : Image.PreserveAspectCrop
                             source: "file:"+thumbnailParentPath+thumbnailKey
                         }
                     }
@@ -166,6 +162,8 @@ ApplicationWindow {
 
                                 Button {
                                     id: updateCheck
+                                    visible: isCompatible
+                                    enabled: isCompatible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
@@ -195,6 +193,8 @@ ApplicationWindow {
 
                                 Button {
                                     id: update
+                                    visible: isCompatible
+                                    enabled: isCompatible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
@@ -215,6 +215,8 @@ ApplicationWindow {
 
                                 Button {
                                     id: enabled
+                                    visible: isCompatible
+                                    enabled: isCompatible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
@@ -245,13 +247,15 @@ ApplicationWindow {
 
                                 Button {
                                     id: remove
-                                    // visible: false
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    onClicked: modpackGridItem.visible = false
+                                    onClicked: {
+                                        backend.permRemoveInstance(index);
+                                    }
+
                                     ToolTip.text: "Remove from List"
                                     ToolTip.visible: hovered
                                     implicitWidth: window.globalCtrlSize
@@ -345,7 +349,7 @@ ApplicationWindow {
                         Button {
                             id: refreshInstances
                             background: Rectangle {
-                                color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                color: parent.enabled? (!parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor) : window.color
                                 radius: window.globalBorderRadius
                             }
                             ToolTip.text: "Re-fetch Instances from Prism Launcher"
@@ -358,6 +362,42 @@ ApplicationWindow {
                                 scale: window.globalIconScale
                                 source: "assets/refresh_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
                                 fillMode: Image.PreserveAspectFit
+                            }
+
+                            onClicked: {
+                                refreshInstances.enabled = false;
+                                clearIgnoreMemory.enabled = false;
+                                backend.refreshPrismInstances();
+                                refreshInstances.enabled = true;
+                                clearIgnoreMemory.enabled = true;
+                            }
+                        }
+
+                        Button {
+                            id: clearIgnoreMemory
+                            background: Rectangle {
+                                color: parent.enabled? (!parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor) : window.color
+                                radius: window.globalBorderRadius
+                            }
+                            ToolTip.text: "Clear Memory of Ignored Modpacks"
+                            ToolTip.visible: hovered
+                            implicitWidth: parent.parent.height
+                            implicitHeight: implicitWidth
+
+                            contentItem: Image {
+                                anchors.fill: parent
+                                scale: window.globalIconScale
+                                source: "assets/history_toggle_off_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            onClicked: {
+                                backend.clearIgnoreMemory();
+                                refreshInstances.enabled = false;
+                                clearIgnoreMemory.enabled = false;
+                                backend.refreshPrismInstances();
+                                refreshInstances.enabled = true;
+                                clearIgnoreMemory.enabled = true;
                             }
                         }
                     }

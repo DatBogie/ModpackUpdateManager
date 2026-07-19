@@ -10,6 +10,19 @@ void ModpackModel::addInstance(const ModpackInstance &instance) {
     endInsertRows();
 }
 
+void ModpackModel::removeInstance(int index) {
+    beginRemoveRows(QModelIndex(), index, index);
+    instanceVec.removeAt(index);
+    endRemoveRows();
+}
+
+int ModpackModel::findNextPrismIndex() {
+    for (int i=0; i<instanceVec.size(); i++)
+        if (instanceVec[i].fromPrism)
+            return i;
+    return -1;
+}
+
 int ModpackModel::rowCount(const QModelIndex &) const {
     return instanceVec.size();
 }
@@ -25,6 +38,10 @@ QVariant ModpackModel::data(const QModelIndex &index, int role) const {
             return mi.thumbnailParentPath;
         case EnabledRole:
             return mi.packEnabled;
+        case FromPrismRole:
+            return mi.fromPrism;
+        case IsCompatibleRole:
+            return mi.isCompatible;
     }
     return {};
 }
@@ -34,6 +51,12 @@ QHash<int, QByteArray> ModpackModel::roleNames() const {
         { NameRole, "name" },
         { ThumbnailKeyRole, "thumbnailKey" },
         { ThumbnailParentPathRole, "thumbnailParentPath" },
-        { EnabledRole, "packEnabled" }
+        { EnabledRole, "packEnabled" },
+        { FromPrismRole, "fromPrism" },
+        { IsCompatibleRole, "isCompatible" }
     };
+}
+
+ModpackInstance ModpackModel::instanceAt(int index) {
+    return instanceVec[index];
 }

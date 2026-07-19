@@ -102,13 +102,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 56,
+				"line" : 57,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 52,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
@@ -767,9 +767,10 @@
 				4,
 				7,
 				9,
-				10,
 				11,
-				12
+				12,
+				13,
+				14
 			]
 		}
 	],
@@ -963,20 +964,20 @@
 				2,
 				3,
 				4,
-				9,
-				10,
 				11,
 				12,
 				13,
+				14,
 				15,
-				16,
-				29,
-				39,
-				40,
-				41,
+				17,
+				18,
+				32,
 				42,
 				43,
-				44
+				44,
+				45,
+				46,
+				47
 			]
 		},
 		{
@@ -985,7 +986,8 @@
 			[
 				1,
 				7,
-				8
+				9,
+				10
 			]
 		},
 		{
@@ -993,16 +995,15 @@
 			"sourceIndexes" : 
 			[
 				5,
-				6
+				6,
+				8
 			]
 		},
 		{
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				14,
-				17,
-				18,
+				16,
 				19,
 				20,
 				21,
@@ -1012,22 +1013,25 @@
 				25,
 				26,
 				27,
-				28
+				28,
+				29,
+				30,
+				31
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				30,
-				31,
-				32,
 				33,
 				34,
 				35,
 				36,
 				37,
-				38
+				38,
+				39,
+				40,
+				41
 			]
 		}
 	],
@@ -1112,6 +1116,25 @@
 			],
 			"compileGroupIndex" : 0,
 			"path" : "modpackmodel.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 82,
+			"backtraces" : 
+			[
+				82
+			],
+			"path" : "backend.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 82,
+			"backtraces" : 
+			[
+				82
+			],
+			"compileGroupIndex" : 0,
+			"path" : "backend.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -1250,6 +1273,15 @@
 				95
 			],
 			"path" : "assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 95,
+			"backtraces" : 
+			[
+				95
+			],
+			"path" : "assets/history_toggle_off_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg",
 			"sourceGroupIndex" : 3
 		},
 		{

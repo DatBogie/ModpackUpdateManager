@@ -10,16 +10,21 @@ class ModpackModel : public QAbstractListModel {
 
     public:
         explicit ModpackModel(QObject *parent = nullptr);
-        void addInstance(const ModpackInstance &instance);
+        Q_INVOKABLE void addInstance(const ModpackInstance &instance);
         enum Roles {
             NameRole = Qt::UserRole + 1,
             ThumbnailKeyRole,
             ThumbnailParentPathRole,
-            EnabledRole
+            EnabledRole,
+            FromPrismRole,
+            IsCompatibleRole
         };
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         QVariant data(const QModelIndex &index, int role) const override;
         QHash<int, QByteArray> roleNames() const override;
+        Q_INVOKABLE void removeInstance(int index);
+        int findNextPrismIndex();
+        ModpackInstance instanceAt(int index);
 
     private:
         QVector<ModpackInstance> instanceVec;

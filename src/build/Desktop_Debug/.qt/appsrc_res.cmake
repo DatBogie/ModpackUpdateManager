@@ -12,6 +12,8 @@ set(src_and_dest_list
     "/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/src/assets/close_small_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
     "/home/dat-bogie/ModpackUpdateManager/src/assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
     "/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/src/assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+    "/home/dat-bogie/ModpackUpdateManager/src/assets/history_toggle_off_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+    "/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/src/assets/history_toggle_off_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
     "/home/dat-bogie/ModpackUpdateManager/src/assets/info_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
     "/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/src/assets/info_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
     "/home/dat-bogie/ModpackUpdateManager/src/assets/license_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"

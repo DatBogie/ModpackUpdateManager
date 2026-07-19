@@ -1,20 +1,14 @@
 {
     "classes": [
         {
-            "className": "ModpackModel",
-            "lineNumber": 8,
+            "className": "Backend",
+            "lineNumber": 7,
             "methods": [
                 {
                     "access": "public",
-                    "arguments": [
-                        {
-                            "name": "instance",
-                            "type": "ModpackInstance"
-                        }
-                    ],
                     "index": 0,
-                    "lineNumber": 13,
-                    "name": "addInstance",
+                    "lineNumber": 15,
+                    "name": "refreshPrismInstances",
                     "returnType": "void"
                 },
                 {
@@ -26,21 +20,28 @@
                         }
                     ],
                     "index": 1,
-                    "lineNumber": 25,
-                    "name": "removeInstance",
+                    "lineNumber": 17,
+                    "name": "permRemoveInstance",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "lineNumber": 19,
+                    "name": "clearIgnoreMemory",
                     "returnType": "void"
                 }
             ],
             "object": true,
-            "qualifiedClassName": "ModpackModel",
+            "qualifiedClassName": "Backend",
             "superClasses": [
                 {
                     "access": "public",
-                    "name": "QAbstractListModel"
+                    "name": "QObject"
                 }
             ]
         }
     ],
-    "inputFile": "modpackmodel.h",
+    "inputFile": "backend.h",
     "outputRevision": 69
 }

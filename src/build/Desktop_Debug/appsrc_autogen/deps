@@ -1,5 +1,7 @@
 appsrc_autogen/timestamp: \
 	/home/dat-bogie/ModpackUpdateManager/src/CMakeLists.txt \
+	/home/dat-bogie/ModpackUpdateManager/src/backend.cpp \
+	/home/dat-bogie/ModpackUpdateManager/src/backend.h \
 	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/qml_imports/appsrc_conf.cmake \
 	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qtcreator/cmake-helper/maintenance_tool_provider.cmake \
 	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qtcreator/cmake-helper/package-manager.cmake \
@@ -312,6 +314,8 @@ appsrc_autogen/timestamp: \
 	/usr/include/locale.h \
 	/usr/include/pthread.h \
 	/usr/include/qt6/QtCore/QAbstractListModel \
+	/usr/include/qt6/QtCore/QObject \
+	/usr/include/qt6/QtCore/QSettings \
 	/usr/include/qt6/QtCore/QString \
 	/usr/include/qt6/QtCore/QVector \
 	/usr/include/qt6/QtCore/q17memory.h \
@@ -388,6 +392,7 @@ appsrc_autogen/timestamp: \
 	/usr/include/qt6/QtCore/qscopedpointer.h \
 	/usr/include/qt6/QtCore/qscopeguard.h \
 	/usr/include/qt6/QtCore/qset.h \
+	/usr/include/qt6/QtCore/qsettings.h \
 	/usr/include/qt6/QtCore/qshareddata.h \
 	/usr/include/qt6/QtCore/qshareddata_impl.h \
 	/usr/include/qt6/QtCore/qsharedpointer.h \
