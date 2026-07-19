@@ -47,12 +47,12 @@ ApplicationWindow {
 
     Component {
         id: modpackGridItem
-
         Item {
+            id: item
+            property bool isEnabled: true
             width: modpackGrid.cellWidth
             height: modpackGrid.cellHeight
             Button {
-                id: modpackThumbnail
                 anchors.centerIn: parent
                 background: Rectangle {
                     color: !parent.down? window.base : window.surface0
@@ -62,6 +62,17 @@ ApplicationWindow {
                 implicitHeight: modpackGrid.cellHeight-window.globalPadding
 
                 Rectangle {
+                    id: icon
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                        bottom: labelContainer.top
+                    }
+                }
+
+                Rectangle {
+                    id: labelContainer
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -87,23 +98,75 @@ ApplicationWindow {
 
                         RowLayout {
                             spacing: -1
+
                             Button {
-                                text: "M"
+                                id: info
                                 palette.buttonText: window.text
                                 Layout.fillHeight: true
                                 background: Rectangle {
                                     color: !parent.down? window.base : window.surface0
                                 }
+                                ToolTip.text: "View Details"
+                                ToolTip.visible: hovered
+                                implicitWidth: 20
+
+                                contentItem: Image {
+                                    anchors.fill: parent
+                                    source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                }
                             }
 
                             Button {
-                                text: "X"
+                                id: updateCheck
+                                text: "⟳"
                                 palette.buttonText: window.text
+                                Layout.fillHeight: true
+                                background: Rectangle {
+                                    color: !parent.down? window.base : window.surface0
+                                }
+                                ToolTip.text: "Check for Updates"
+                                ToolTip.visible: hovered
+                            }
+
+                            Button {
+                                id: update
+                                text: "⤓"
+                                palette.buttonText: window.text
+                                Layout.fillHeight: true
+                                background: Rectangle {
+                                    color: !parent.down? window.base : window.surface0
+                                }
+                                ToolTip.text: "Update"
+                                ToolTip.visible: hovered
+                            }
+
+                            Button {
+                                id: enabled
+                                text: item.isEnabled? "✓" : "✗"
+                                palette.buttonText: item.isEnabled? window.green : window.red
+                                Layout.fillHeight: true
+                                background: Rectangle {
+                                    color: !parent.down? window.base : window.surface0
+                                    bottomRightRadius: remove.visible? 0 : window.globalBorderRadius
+                                }
+                                onClicked: item.isEnabled = !item.isEnabled
+                                ToolTip.text: "Modpack Auto-Updates: "+(item.isEnabled? "Enabled" : "Disabled")
+                                ToolTip.visible: hovered
+                            }
+
+                            Button {
+                                id: remove
+                                // visible: false
+                                text: "–"
+                                palette.buttonText: window.yellow
                                 Layout.fillHeight: true
                                 background: Rectangle {
                                     color: !parent.down? window.base : window.surface0
                                     bottomRightRadius: window.globalBorderRadius
                                 }
+                                onClicked: modpackGridItem.visible = false
+                                ToolTip.text: "Remove from List"
+                                ToolTip.visible: hovered
                             }
                         }
                     }
@@ -124,7 +187,7 @@ ApplicationWindow {
             anchors.fill: parent
             model: 10
             delegate: modpackGridItem
-            property int minCellWidth: 250
+            property int minCellWidth: 300
             property int minCellHeight: 150
             property int columns: Math.max(1, Math.floor(width/minCellWidth))
             cellWidth: width/columns

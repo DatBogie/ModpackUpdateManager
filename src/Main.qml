@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
+import QtQuick.Effects
 
 ApplicationWindow {
     id: window
@@ -40,69 +41,237 @@ ApplicationWindow {
     property color crust: "#181926"
     property color accent: window.lavender
 
+    property int globalCtrlSize: 25
     property int globalPadding: 5
     property int globalBorderRadius: 10
+    property real globalIconScale: .8
+    property real globalModpackScale: .85
+    property int globalHeaderSize: 18
+
+    property string sPrismPath: "~/.local/share/PrismLauncher/instances/"
 
     color: window.crust
 
     Component {
         id: modpackGridItem
-
         Item {
+            id: item
+            property bool isCompatible: false
+            property bool isEnabled: true
             width: modpackGrid.cellWidth
             height: modpackGrid.cellHeight
             Button {
-                id: modpackThumbnail
                 anchors.centerIn: parent
                 background: Rectangle {
-                    color: !parent.down? window.base : window.surface0
+                    // color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                    color: window.base
                     radius: window.globalBorderRadius
                 }
                 implicitWidth: modpackGrid.cellWidth-window.globalPadding
                 implicitHeight: modpackGrid.cellHeight-window.globalPadding
 
-                Rectangle {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                    height: 20
-                    color: window.surface1
-                    bottomLeftRadius: window.globalBorderRadius
-                    bottomRightRadius: window.globalBorderRadius
+                contentItem: Item {
+                    id: content
+                    anchors.fill: parent
 
-                    RowLayout {
+                    layer.enabled: true
+                    layer.effect: MultiEffect {
+                        maskEnabled: true
+                        maskSource: mask
+                        maskThresholdMin: .5
+                        maskSpreadAtMin: 1
+                    }
+
+                    Rectangle {
+                        id: mask
                         anchors.fill: parent
-                        Label {
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.fillWidth: true
-                            horizontalAlignment: "AlignLeft"
-                            verticalAlignment: "AlignVCenter"
-                            text: "Testdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-                            leftPadding: window.globalPadding
-                            color: window.text
-                            elide: Text.ElideRight
+                        radius: window.globalBorderRadius
+                        visible: false
+                        layer.enabled: true
+                    }
+
+                    Rectangle {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: parent.top
+                            bottom: labelContainer.top
                         }
+                        color: window.surface0
+
+                        Image {
+                            id: thumbnail
+                            anchors.fill: parent
+                            fillMode: Image.PreserveAspectFit
+                            source: "file:"+thumbnailParentPath+thumbnailKey
+                        }
+                    }
+
+                    Rectangle {
+                        id: labelContainer
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            bottom: parent.bottom
+                        }
+                        height: 25
+                        color: window.base
+
+                        property color childPressColor: window.surface0
 
                         RowLayout {
-                            spacing: -1
-                            Button {
-                                text: "M"
-                                palette.buttonText: window.text
-                                Layout.fillHeight: true
-                                background: Rectangle {
-                                    color: !parent.down? window.base : window.surface0
-                                }
+                            anchors.fill: parent
+                            Label {
+                                Layout.alignment: Qt.AlignVCenter
+                                Layout.fillWidth: true
+                                horizontalAlignment: "AlignLeft"
+                                verticalAlignment: "AlignVCenter"
+                                text: name
+                                leftPadding: window.globalPadding
+                                color: window.text
+                                elide: Text.ElideRight
                             }
 
-                            Button {
-                                text: "X"
-                                palette.buttonText: window.text
-                                Layout.fillHeight: true
-                                background: Rectangle {
-                                    color: !parent.down? window.base : window.surface0
-                                    bottomRightRadius: window.globalBorderRadius
+                            RowLayout {
+                                spacing: 0
+
+                                Button {
+                                    id: info
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    ToolTip.text: "View Details..."
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    contentItem: Image {
+                                        id: infoBtnIcon
+                                        visible: false
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/info_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    MultiEffect {
+                                        scale: infoBtnIcon.scale
+                                        anchors.fill: infoBtnIcon
+                                        source: infoBtnIcon
+                                        colorization: 1.0
+                                        colorizationColor: window.sky
+                                    }
+                                }
+
+                                Button {
+                                    id: updateCheck
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    ToolTip.text: "Check for Updates"
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    contentItem: Image {
+                                        id: updateCheckBtnIcon
+                                        visible: false
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/update_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    MultiEffect {
+                                        scale: updateCheckBtnIcon.scale
+                                        anchors.fill: updateCheckBtnIcon
+                                        source: updateCheckBtnIcon
+                                        colorization: 1.0
+                                        colorizationColor: window.rosewater
+                                    }
+                                }
+
+                                Button {
+                                    id: update
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    ToolTip.text: "Update"
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    contentItem: Image {
+                                        id: updateBtnIcon
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+                                }
+
+                                Button {
+                                    id: enabled
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    onClicked: packEnabled = !packEnabled
+                                    ToolTip.text: "Modpack Auto-Updates: "+(packEnabled? "Enabled" : "Disabled")
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    contentItem: Image {
+                                        id: enabledBtnIcon
+                                        visible: false
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: packEnabled? "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" : "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    MultiEffect {
+                                        scale: enabledBtnIcon.scale
+                                        anchors.fill: enabledBtnIcon
+                                        source: enabledBtnIcon
+                                        colorization: 1.0
+                                        colorizationColor: packEnabled? window.green : window.red
+                                    }
+                                }
+
+                                Button {
+                                    id: remove
+                                    // visible: false
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    onClicked: modpackGridItem.visible = false
+                                    ToolTip.text: "Remove from List"
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    contentItem: Image {
+                                        id: removeBtnIcon
+                                        visible: false
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/remove_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    MultiEffect {
+                                        scale: removeBtnIcon.scale
+                                        anchors.fill: removeBtnIcon
+                                        source: removeBtnIcon
+                                        colorization: 1.0
+                                        colorizationColor: window.lavender
+                                    }
                                 }
                             }
                         }
@@ -112,20 +281,160 @@ ApplicationWindow {
         }
     }
 
-    RowLayout {
+    ColumnLayout {
         anchors {
             fill: parent
             margins: window.globalPadding
         }
 
+        RowLayout {
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+            height: 50
+            property color childColor: window.base
+            property color childPressColor: window.surface0
+
+            Text {
+                color: window.text
+                text: "Instances"
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignBottom
+                padding: window.globalPadding
+                bottomPadding: -window.globalPadding/2
+                font.pointSize: window.globalHeaderSize
+                font.bold: true
+            }
+
+            Rectangle {
+                Layout.fillWidth: true
+                implicitHeight: parent.height-window.globalPadding/2
+                color: window.color
+
+                Rectangle {
+                    color: parent.parent.childColor
+                    anchors {
+                        left: parent.left
+                        bottom: parent.bottom
+                    }
+                    height: window.globalCtrlSize-window.globalPadding/2
+                    width: childrenRect.width
+                    radius: window.globalBorderRadius
+
+                    RowLayout {
+                        Layout.fillHeight: true
+
+                        Button {
+                            id: uploadInstance
+                            background: Rectangle {
+                                color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                radius: window.globalBorderRadius
+                            }
+                            ToolTip.text: "Upload Instance (.zip)..."
+                            ToolTip.visible: hovered
+                            implicitWidth: parent.parent.height
+                            implicitHeight: implicitWidth
+
+                            contentItem: Image {
+                                anchors.fill: parent
+                                scale: window.globalIconScale
+                                source: "assets/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+                        }
+
+                        Button {
+                            id: refreshInstances
+                            background: Rectangle {
+                                color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                radius: window.globalBorderRadius
+                            }
+                            ToolTip.text: "Re-fetch Instances from Prism Launcher"
+                            ToolTip.visible: hovered
+                            implicitWidth: parent.parent.height
+                            implicitHeight: implicitWidth
+
+                            contentItem: Image {
+                                anchors.fill: parent
+                                scale: window.globalIconScale
+                                source: "assets/refresh_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+                        }
+                    }
+                }
+
+                Rectangle {
+                    color: parent.parent.childColor
+                    anchors {
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+
+                    height: window.globalCtrlSize-window.globalPadding/2
+                    width: childrenRect.width
+                    radius: window.globalBorderRadius
+
+                    RowLayout {
+                        Layout.fillHeight: true
+                        layoutDirection: Qt.RightToLeft
+
+                        Button {
+                            id: settingsBtn
+                            background: Rectangle {
+                                color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                radius: window.globalBorderRadius
+                            }
+                            ToolTip.text: "Manage Settings..."
+                            ToolTip.visible: hovered
+                            implicitWidth: parent.parent.height
+                            implicitHeight: implicitWidth
+
+                            contentItem: Image {
+                                anchors.fill: parent
+                                scale: window.globalIconScale
+                                source: "assets/settings_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+                        }
+
+                        Button {
+                            id: licenseBtn
+                            background: Rectangle {
+                                color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                radius: window.globalBorderRadius
+                            }
+                            ToolTip.text: "View Program License..."
+                            ToolTip.visible: hovered
+                            implicitWidth: parent.parent.height
+                            implicitHeight: implicitWidth
+
+                            contentItem: Image {
+                                anchors.fill: parent
+                                scale: window.globalIconScale
+                                source: "assets/license_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            Layout.fillWidth: true
+            color: window.text
+            height: 1
+        }
+
         GridView {
             id: modpackGrid
-            Layout.alignment: Qt.AlignTop
-            anchors.fill: parent
-            model: 10
+            clip: true
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            model: modpackModel
             delegate: modpackGridItem
-            property int minCellWidth: 250
-            property int minCellHeight: 150
+            property int minCellWidth: 250*window.globalModpackScale
+            property int minCellHeight: 150*window.globalModpackScale
             property int columns: Math.max(1, Math.floor(width/minCellWidth))
             cellWidth: width/columns
             cellHeight: minCellHeight

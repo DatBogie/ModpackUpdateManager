@@ -2,4 +2,6 @@
 /home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/qmake_src.qrc
 --resource
 /home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/appsrc_raw_qml_0.qrc
+--resource
+/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/appsrc_raw_res_0.qrc
 /qt/qml/src/Main.qml

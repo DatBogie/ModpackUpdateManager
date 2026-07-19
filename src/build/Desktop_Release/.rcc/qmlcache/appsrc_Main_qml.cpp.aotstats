@@ -26,7 +26,7 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 52,
+                            "line": 53,
                             "message": "Cannot access value for name modpackGrid"
                         },
                         {
@@ -34,7 +34,7 @@
                             "column": 21,
                             "durationMicroseconds": 0,
                             "functionName": "height",
-                            "line": 53,
+                            "line": 54,
                             "message": "Cannot access value for name modpackGrid"
                         },
                         {
@@ -78,35 +78,11 @@
                             "message": "Cannot access value for name window"
                         },
                         {
-                            "codegenResult": 2,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 71,
-                            "message": "Cannot access value for name window"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 39,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottomLeftRadius",
-                            "line": 72,
-                            "message": "Cannot access value for name window"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottomRightRadius",
-                            "line": 73,
-                            "message": "Cannot access value for name window"
-                        },
-                        {
                             "codegenResult": 0,
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 66,
+                            "line": 67,
                             "message": ""
                         },
                         {
@@ -114,7 +90,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 67,
+                            "line": 68,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 69,
                             "message": ""
                         },
                         {
@@ -122,7 +106,55 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 68,
+                            "line": 70,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 82,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottomLeftRadius",
+                            "line": 83,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottomRightRadius",
+                            "line": 84,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 77,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 78,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 79,
                             "message": ""
                         },
                         {
@@ -130,7 +162,7 @@
                             "column": 39,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 76,
+                            "line": 87,
                             "message": ""
                         },
                         {
@@ -138,7 +170,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "leftPadding",
-                            "line": 83,
+                            "line": 94,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -146,7 +178,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 84,
+                            "line": 95,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -154,7 +186,7 @@
                             "column": 36,
                             "durationMicroseconds": 0,
                             "functionName": "elide",
-                            "line": 85,
+                            "line": 96,
                             "message": ""
                         },
                         {
@@ -162,7 +194,7 @@
                             "column": 47,
                             "durationMicroseconds": 0,
                             "functionName": "alignment",
-                            "line": 78,
+                            "line": 89,
                             "message": ""
                         },
                         {
@@ -170,7 +202,7 @@
                             "column": 53,
                             "durationMicroseconds": 0,
                             "functionName": "buttonText",
-                            "line": 92,
+                            "line": 104,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -178,15 +210,31 @@
                             "column": 44,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 95,
+                            "line": 107,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 110,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 114,
+                            "message": ""
                         },
                         {
                             "codegenResult": 2,
                             "column": 53,
                             "durationMicroseconds": 0,
                             "functionName": "buttonText",
-                            "line": 101,
+                            "line": 122,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -194,7 +242,71 @@
                             "column": 44,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 104,
+                            "line": 125,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 128,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 53,
+                            "durationMicroseconds": 0,
+                            "functionName": "buttonText",
+                            "line": 134,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 137,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 140,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 145,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 152,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 53,
+                            "durationMicroseconds": 0,
+                            "functionName": "buttonText",
+                            "line": 146,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 149,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -202,15 +314,71 @@
                             "column": 56,
                             "durationMicroseconds": 0,
                             "functionName": "bottomRightRadius",
-                            "line": 105,
+                            "line": 150,
                             "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 153,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 154,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 167,
+                            "message": "Cannot access value for name modpackGridItem"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 53,
+                            "durationMicroseconds": 0,
+                            "functionName": "buttonText",
+                            "line": 161,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 164,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 56,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottomRightRadius",
+                            "line": 165,
+                            "message": "Cannot access value for name window"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 169,
+                            "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 19,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 117,
+                            "line": 180,
                             "message": ""
                         },
                         {
@@ -218,7 +386,7 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "margins",
-                            "line": 118,
+                            "line": 181,
                             "message": ""
                         },
                         {
@@ -226,7 +394,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "delegate",
-                            "line": 126,
+                            "line": 189,
                             "message": ""
                         },
                         {
@@ -234,7 +402,7 @@
                             "column": 35,
                             "durationMicroseconds": 0,
                             "functionName": "columns",
-                            "line": 129,
+                            "line": 192,
                             "message": ""
                         },
                         {
@@ -242,7 +410,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "cellWidth",
-                            "line": 130,
+                            "line": 193,
                             "message": ""
                         },
                         {
@@ -250,7 +418,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "cellHeight",
-                            "line": 131,
+                            "line": 194,
                             "message": ""
                         },
                         {
@@ -258,7 +426,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "alignment",
-                            "line": 123,
+                            "line": 186,
                             "message": ""
                         },
                         {
@@ -266,7 +434,7 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 124,
+                            "line": 187,
                             "message": ""
                         }
                     ],

@@ -17,10 +17,26 @@ qt_add_executable(appsrc
     main.cpp
 )
 
+file(GLOB_RECURSE ASSET_FILES
+    RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/assets/*"
+)
+foreach(asset ${ASSET_FILES})
+    set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/${asset}
+        PROPERTIES
+            QT_RESOURCE_ALIAS "${asset}"
+    )
+endforeach()
+
 qt_add_qml_module(appsrc
     URI src
     QML_FILES
         Main.qml
+    RESOURCES
+        ${ASSET_FILES}
+        SOURCES modpackinstance.h
+        SOURCES modpackmodel.h modpackmodel.cpp
+        SOURCES backend.h backend.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

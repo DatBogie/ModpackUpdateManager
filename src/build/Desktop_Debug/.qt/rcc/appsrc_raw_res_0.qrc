@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="/qt/qml/src/">
+    <file alias="assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/check_small_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/check_small_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/close_small_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/close_small_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/info_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/info_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/license_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/license_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/refresh_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/refresh_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/remove_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/remove_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/settings_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/settings_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/update_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/update_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file alias="assets/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg">/home/dat-bogie/ModpackUpdateManager/src/assets/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,9 @@
+module src
+linktarget appsrcplugin
+optional plugin appsrcplugin
+classname srcPlugin
+typeinfo appsrc.qmltypes
+prefer :/qt/qml/src/
+Main 254.0 Main.qml
+depends QtQuick
+
