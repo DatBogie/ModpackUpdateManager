@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Basic
 import QtQuick.Effects
+import QtQuick.Dialogs
 
 ApplicationWindow {
     id: window
@@ -344,6 +345,16 @@ ApplicationWindow {
                                 source: "assets/upload_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
                                 fillMode: Image.PreserveAspectFit
                             }
+
+                            FileDialog {
+                                id: zipDia
+                                nameFilters: [
+                                    "Prism Launcher Instances (*.zip)"
+                                ]
+                                onAccepted: backend.importInstance(selectedFile)
+                            }
+
+                            onClicked: zipDia.open()
                         }
 
                         Button {

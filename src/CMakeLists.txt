@@ -5,6 +5,7 @@ project(src VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(QuaZip-Qt6 REQUIRED)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -52,6 +53,7 @@ set_target_properties(appsrc PROPERTIES
 
 target_link_libraries(appsrc
     PRIVATE Qt6::Quick
+            QuaZip::QuaZip
 )
 
 install(TARGETS appsrc

@@ -3,6 +3,11 @@
 #include <QDir>
 #include <QFile>
 #include <QList>
+#include <QDebug>
+#include <QUrl>
+
+#include <quazip/quazip.h>
+#include <quazip/quazipfile.h>
 
 void Backend::findPrismPath() {
     #ifdef Q_OS_LINUX
@@ -16,48 +21,52 @@ void Backend::findPrismPath() {
     #endif
 }
 
+void Backend::addInstance(QString dir) {
+    QString name;
+    QString thumbKey;
+    QString thumbParentPath;
+    QFile cfg = QFile(dir+"/instance.cfg");
+    if (cfg.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&cfg);
+        while (!in.atEnd()) {
+            QString ln = in.readLine();
+            QStringList parts = ln.split('=');
+            if (parts.size() == 2) {
+                QString key = parts[0].trimmed();
+                QString val = parts[1].trimmed();
+                if (key == "name")
+                    name = val;
+                else if (key == "iconKey")
+                    thumbKey = val;
+            }
+        }
+    }
+    if (ignoredInstances.contains(name)) return;
+    QVector<QString> imageTypes = {"",".png",".jpg",".jpeg",".webp",".gif"};
+    bool thumbExists = false;
+    for (QString &ext : imageTypes) {
+        thumbExists = QFile(prismPath+"/icons/"+thumbKey+ext).exists();
+        if (thumbExists) {
+            thumbKey += ext;
+            break;
+        }
+    }
+    if (thumbExists)
+        thumbParentPath = prismPath+"/icons/";
+    else {
+        thumbKey = "icon.png";
+        thumbParentPath = dir+"/minecraft/";
+    }
+    bool isCompatible = QFile(dir+"/.modpackupdatemanager.json").exists();
+    model.addInstance({ name, thumbKey, thumbParentPath, isCompatible, true, isCompatible });
+}
+
 void Backend::loadPrismInstances() {
     QDirIterator iter(prismPath+"/instances");
     while (iter.hasNext()) {
         QString dir = iter.next();
         if (dir.endsWith(".") || dir.endsWith("..") || !QDir(dir).exists()) continue;
-        QString name;
-        QString thumbKey;
-        QString thumbParentPath;
-        QFile cfg = QFile(dir+"/instance.cfg");
-        if (cfg.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream in(&cfg);
-            while (!in.atEnd()) {
-                QString ln = in.readLine();
-                QStringList parts = ln.split('=');
-                if (parts.size() == 2) {
-                    QString key = parts[0].trimmed();
-                    QString val = parts[1].trimmed();
-                    if (key == "name")
-                        name = val;
-                    else if (key == "iconKey")
-                        thumbKey = val;
-                }
-            }
-        }
-        if (ignoredInstances.contains(name)) continue;
-        QVector<QString> imageTypes = {"",".png",".jpg",".jpeg",".webp",".gif"};
-        bool thumbExists = false;
-        for (QString &ext : imageTypes) {
-            thumbExists = QFile(prismPath+"/icons/"+thumbKey+ext).exists();
-            if (thumbExists) {
-                thumbKey += ext;
-                break;
-            }
-        }
-        if (thumbExists)
-            thumbParentPath = prismPath+"/icons/";
-        else {
-            thumbKey = "icon.png";
-            thumbParentPath = dir+"/minecraft/";
-        }
-        bool isCompatible = QFile(dir+"/.modpackupdatemanager.json").exists();
-        model.addInstance({ name, thumbKey, thumbParentPath, isCompatible, true, isCompatible });
+        addInstance(dir);
     }
 }
 
@@ -85,4 +94,42 @@ void Backend::permRemoveInstance(int index) {
 void Backend::clearIgnoreMemory() {
     ignoredInstances.clear();
     settings.setValue("IgnoredModpacks", ignoredInstances);
+}
+
+void Backend::importInstance(QString path) {
+    path = QUrl(path).toLocalFile();
+    QFileInfo info(path);
+    if (info.suffix().compare("zip", Qt::CaseInsensitive) != 0) return;
+    QuaZip zip(path);
+    if (!zip.open(QuaZip::mdUnzip)) {
+        qDebug() << zip.getZipName();
+        qDebug() << zip.getZipError();
+        return;
+    }
+    QString dest = prismPath+"/instances/"+info.baseName();
+    QDir dir(dest);
+    if (dir.exists()) {
+        int i=0;
+        while (dir.exists() && i<100) {
+            i++;
+            dir = QDir(dest+" (" + QString::number(i) + ")");
+        }
+        if (dir.exists()) return;
+    }
+    dir.mkpath(".");
+    for (bool more = zip.goToFirstFile(); more; more = zip.goToNextFile()) {
+        QString fName = zip.getCurrentFileName();
+        QString nPath = dest+"/"+fName;
+        QuaZipFile zipFile(&zip);
+        if (!zipFile.open(QIODevice::ReadOnly)) continue;
+        QFile nFile(nPath);
+        QDir().mkpath(QFileInfo(nPath).path());
+        if (nFile.open(QIODevice::WriteOnly)) {
+            nFile.write(zipFile.readAll());
+            nFile.close();
+        }
+        zipFile.close();
+    }
+    zip.close();
+    addInstance(dir.path());
 }

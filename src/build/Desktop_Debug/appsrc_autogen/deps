@@ -516,6 +516,15 @@ appsrc_autogen/timestamp: \
 	/usr/lib/cmake/Qt6Core/Qt6CoreTargets.cmake \
 	/usr/lib/cmake/Qt6Core/Qt6CoreTargetsPrecheck.cmake \
 	/usr/lib/cmake/Qt6Core/Qt6CoreVersionlessAliasTargets.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatAdditionalTargetInfo.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatConfig.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatConfigVersion.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatConfigVersionImpl.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatDependencies.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatTargets-relwithdebinfo.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatTargets.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatTargetsPrecheck.cmake \
+	/usr/lib/cmake/Qt6Core5Compat/Qt6Core5CompatVersionlessAliasTargets.cmake \
 	/usr/lib/cmake/Qt6CoreTools/Qt6CoreToolsAdditionalTargetInfo.cmake \
 	/usr/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfig.cmake \
 	/usr/lib/cmake/Qt6CoreTools/Qt6CoreToolsConfigVersion.cmake \
@@ -1492,6 +1501,10 @@ appsrc_autogen/timestamp: \
 	/usr/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargetsPrecheck.cmake \
 	/usr/lib/cmake/Qt6QuickTools/Qt6QuickToolsVersionlessTargets.cmake \
 	/usr/lib/cmake/Qt6QuickTools/Qt6SvgToQmlMacros.cmake \
+	/usr/lib/cmake/QuaZip-Qt6-1.7.2/QuaZip-Qt6Config.cmake \
+	/usr/lib/cmake/QuaZip-Qt6-1.7.2/QuaZip-Qt6ConfigVersion.cmake \
+	/usr/lib/cmake/QuaZip-Qt6-1.7.2/QuaZip-Qt6_SharedTargets-release.cmake \
+	/usr/lib/cmake/QuaZip-Qt6-1.7.2/QuaZip-Qt6_SharedTargets.cmake \
 	/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
 	/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdbool.h \
 	/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
@@ -1502,20 +1515,24 @@ appsrc_autogen/timestamp: \
 	/usr/share/cmake/Modules/CMakeGenericSystem.cmake \
 	/usr/share/cmake/Modules/CMakeInitializeConfigs.cmake \
 	/usr/share/cmake/Modules/CMakeLanguageInformation.cmake \
+	/usr/share/cmake/Modules/CMakePushCheckState.cmake \
 	/usr/share/cmake/Modules/CMakeSystemSpecificInformation.cmake \
 	/usr/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake \
 	/usr/share/cmake/Modules/CheckCXXCompilerFlag.cmake \
 	/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake \
 	/usr/share/cmake/Modules/CheckIncludeFileCXX.cmake \
 	/usr/share/cmake/Modules/CheckLibraryExists.cmake \
+	/usr/share/cmake/Modules/CheckSymbolExists.cmake \
 	/usr/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
 	/usr/share/cmake/Modules/Compiler/GNU-CXX.cmake \
 	/usr/share/cmake/Modules/Compiler/GNU.cmake \
+	/usr/share/cmake/Modules/FindBZip2.cmake \
 	/usr/share/cmake/Modules/FindOpenGL.cmake \
 	/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake \
 	/usr/share/cmake/Modules/FindPackageMessage.cmake \
 	/usr/share/cmake/Modules/FindThreads.cmake \
 	/usr/share/cmake/Modules/FindVulkan.cmake \
+	/usr/share/cmake/Modules/FindZLIB.cmake \
 	/usr/share/cmake/Modules/GNUInstallDirs.cmake \
 	/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake \
 	/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake \
@@ -1533,4 +1550,5 @@ appsrc_autogen/timestamp: \
 	/usr/share/cmake/Modules/Platform/Linux-Initialize.cmake \
 	/usr/share/cmake/Modules/Platform/Linux.cmake \
 	/usr/share/cmake/Modules/Platform/UnixPaths.cmake \
+	/usr/share/cmake/Modules/SelectLibraryConfigurations.cmake \
 	/usr/bin/cmake
