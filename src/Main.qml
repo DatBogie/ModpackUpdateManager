@@ -521,7 +521,7 @@ ApplicationWindow {
             sourceItem: windowContent
             anchors.fill: parent
             sourceRect: Qt.rect(0, 0, pageContent.width, pageContent.height)
-            live: false
+            live: true
             hideSource: false
         }
 

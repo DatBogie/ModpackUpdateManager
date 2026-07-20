@@ -85,3 +85,16 @@
 180	196	1784532127092776596	CMakeFiles/appsrc.dir/build/Desktop_Debug/.qt/rcc/qrc_appsrc_raw_qml_0.cpp.o	62bf21af789b436f
 180	3272	1784532127091690719	CMakeFiles/appsrc.dir/build/Desktop_Debug/.rcc/qmlcache/appsrc_Main_qml.cpp.o	8a26496e35281d89
 3272	3623	1784532130183689483	appsrc	ea741ba085d76288
+3	10	1784532733722318658	.qt/appsrc_qml.txt	960e06fc80c336f5
+3	10	1784532733722318658	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/appsrc_qml.txt	960e06fc80c336f5
+3	56	1784532733767759973	.qt/qml_imports/appsrc_build.cmake	ad52168b8a05f1ec
+3	56	1784532733767759973	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/qml_imports/appsrc_build.cmake	ad52168b8a05f1ec
+56	71	1784532733782054155	.qt/rcc/qrc_appsrc_raw_qml_0.cpp	44861b153f24c1b
+56	71	1784532733782054155	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.qt/rcc/qrc_appsrc_raw_qml_0.cpp	44861b153f24c1b
+56	182	1784532733888054291	.rcc/qmlcache/appsrc_Main_qml.cpp	733d1c9c6478ab85
+56	182	1784532733888054291	.rcc/qmlcache/appsrc_Main_qml.cpp.aotstats	733d1c9c6478ab85
+56	182	1784532733888054291	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.rcc/qmlcache/appsrc_Main_qml.cpp	733d1c9c6478ab85
+56	182	1784532733888054291	/home/dat-bogie/ModpackUpdateManager/src/build/Desktop_Debug/.rcc/qmlcache/appsrc_Main_qml.cpp.aotstats	733d1c9c6478ab85
+183	199	1784532733895572590	CMakeFiles/appsrc.dir/build/Desktop_Debug/.qt/rcc/qrc_appsrc_raw_qml_0.cpp.o	62bf21af789b436f
+183	3341	1784532733895054300	CMakeFiles/appsrc.dir/build/Desktop_Debug/.rcc/qmlcache/appsrc_Main_qml.cpp.o	8a26496e35281d89
+3341	3711	1784532737053058347	appsrc	ea741ba085d76288
