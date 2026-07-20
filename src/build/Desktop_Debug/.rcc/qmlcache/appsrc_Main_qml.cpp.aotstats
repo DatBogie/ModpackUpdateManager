@@ -273,6 +273,14 @@
                             "codegenResult": 2,
                             "column": 48,
                             "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 146,
+                            "message": "Cannot access value for name modalBackground"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 48,
+                            "durationMicroseconds": 0,
                             "functionName": "color",
                             "line": 139,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
@@ -298,7 +306,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 150,
+                            "line": 157,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -306,7 +314,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 152,
+                            "line": 159,
                             "message": ""
                         },
                         {
@@ -314,23 +322,23 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 149,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 48,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
                             "line": 156,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 163,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "source",
-                            "line": 158,
+                            "line": 165,
                             "message": ""
                         },
                         {
@@ -338,7 +346,7 @@
                             "column": 60,
                             "durationMicroseconds": 0,
                             "functionName": "colorizationColor",
-                            "line": 160,
+                            "line": 167,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -346,7 +354,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 157,
+                            "line": 164,
                             "message": ""
                         },
                         {
@@ -354,7 +362,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 166,
+                            "line": 173,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -362,7 +370,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "enabled",
-                            "line": 167,
+                            "line": 174,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -370,7 +378,7 @@
                             "column": 52,
                             "durationMicroseconds": 0,
                             "functionName": "implicitWidth",
-                            "line": 175,
+                            "line": 182,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -378,7 +386,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 170,
+                            "line": 177,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -386,7 +394,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 171,
+                            "line": 178,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -394,7 +402,7 @@
                             "column": 54,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 174,
+                            "line": 181,
                             "message": ""
                         },
                         {
@@ -402,7 +410,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 181,
+                            "line": 188,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -410,7 +418,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 183,
+                            "line": 190,
                             "message": ""
                         },
                         {
@@ -418,23 +426,23 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 180,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 48,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
                             "line": 187,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 194,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "source",
-                            "line": 189,
+                            "line": 196,
                             "message": ""
                         },
                         {
@@ -442,7 +450,7 @@
                             "column": 60,
                             "durationMicroseconds": 0,
                             "functionName": "colorizationColor",
-                            "line": 191,
+                            "line": 198,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -450,7 +458,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 188,
+                            "line": 195,
                             "message": ""
                         },
                         {
@@ -458,7 +466,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 197,
+                            "line": 204,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -466,7 +474,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "enabled",
-                            "line": 198,
+                            "line": 205,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -474,7 +482,7 @@
                             "column": 52,
                             "durationMicroseconds": 0,
                             "functionName": "implicitWidth",
-                            "line": 206,
+                            "line": 213,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -482,7 +490,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 201,
+                            "line": 208,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -490,7 +498,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 202,
+                            "line": 209,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -498,7 +506,7 @@
                             "column": 54,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 205,
+                            "line": 212,
                             "message": ""
                         },
                         {
@@ -506,7 +514,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 211,
+                            "line": 218,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -514,7 +522,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 213,
+                            "line": 220,
                             "message": ""
                         },
                         {
@@ -522,7 +530,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 210,
+                            "line": 217,
                             "message": ""
                         },
                         {
@@ -530,7 +538,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 219,
+                            "line": 226,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -538,7 +546,7 @@
                             "column": 46,
                             "durationMicroseconds": 0,
                             "functionName": "enabled",
-                            "line": 220,
+                            "line": 227,
                             "message": "Cannot access value for name isCompatible"
                         },
                         {
@@ -546,7 +554,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 226,
+                            "line": 233,
                             "message": "Cannot access value for name packEnabled"
                         },
                         {
@@ -554,7 +562,7 @@
                             "column": 52,
                             "durationMicroseconds": 0,
                             "functionName": "implicitWidth",
-                            "line": 229,
+                            "line": 236,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -562,7 +570,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 223,
+                            "line": 230,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -570,7 +578,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 224,
+                            "line": 231,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -578,7 +586,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "text",
-                            "line": 227,
+                            "line": 234,
                             "message": "Cannot access value for name packEnabled"
                         },
                         {
@@ -586,7 +594,7 @@
                             "column": 54,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 228,
+                            "line": 235,
                             "message": ""
                         },
                         {
@@ -594,7 +602,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 235,
+                            "line": 242,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -602,7 +610,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "source",
-                            "line": 236,
+                            "line": 243,
                             "message": "Cannot access value for name packEnabled"
                         },
                         {
@@ -610,7 +618,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 237,
+                            "line": 244,
                             "message": ""
                         },
                         {
@@ -618,7 +626,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 234,
+                            "line": 241,
                             "message": ""
                         },
                         {
@@ -626,7 +634,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 241,
+                            "line": 248,
                             "message": ""
                         },
                         {
@@ -634,7 +642,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "source",
-                            "line": 243,
+                            "line": 250,
                             "message": ""
                         },
                         {
@@ -642,7 +650,7 @@
                             "column": 60,
                             "durationMicroseconds": 0,
                             "functionName": "colorizationColor",
-                            "line": 245,
+                            "line": 252,
                             "message": "Cannot access value for name packEnabled"
                         },
                         {
@@ -650,7 +658,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 242,
+                            "line": 249,
                             "message": ""
                         },
                         {
@@ -658,7 +666,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 256,
+                            "line": 263,
                             "message": "Cannot access value for name backend"
                         },
                         {
@@ -666,7 +674,7 @@
                             "column": 52,
                             "durationMicroseconds": 0,
                             "functionName": "implicitWidth",
-                            "line": 262,
+                            "line": 269,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -674,7 +682,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 253,
+                            "line": 260,
                             "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -682,7 +690,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 254,
+                            "line": 261,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -690,7 +698,7 @@
                             "column": 54,
                             "durationMicroseconds": 0,
                             "functionName": "visible",
-                            "line": 261,
+                            "line": 268,
                             "message": ""
                         },
                         {
@@ -698,7 +706,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 268,
+                            "line": 275,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -706,7 +714,7 @@
                             "column": 51,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 270,
+                            "line": 277,
                             "message": ""
                         },
                         {
@@ -714,7 +722,7 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 267,
+                            "line": 274,
                             "message": ""
                         },
                         {
@@ -722,7 +730,7 @@
                             "column": 48,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 274,
+                            "line": 281,
                             "message": ""
                         },
                         {
@@ -730,7 +738,7 @@
                             "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "source",
-                            "line": 276,
+                            "line": 283,
                             "message": ""
                         },
                         {
@@ -738,7 +746,7 @@
                             "column": 60,
                             "durationMicroseconds": 0,
                             "functionName": "colorizationColor",
-                            "line": 278,
+                            "line": 285,
                             "message": "Cannot access value for name window"
                         },
                         {
@@ -746,103 +754,599 @@
                             "column": 55,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 275,
+                            "line": 282,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 19,
+                            "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 291,
+                            "line": 298,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 22,
-                            "durationMicroseconds": 0,
-                            "functionName": "margins",
-                            "line": 292,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "childColor",
-                            "line": 299,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "childPressColor",
-                            "line": 300,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 31,
-                            "durationMicroseconds": 0,
-                            "functionName": "alignment",
-                            "line": 296,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 24,
+                            "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 303,
+                            "line": 302,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 38,
+                            "column": 27,
                             "durationMicroseconds": 0,
-                            "functionName": "horizontalAlignment",
-                            "line": 305,
+                            "functionName": "fill",
+                            "line": 301,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 36,
+                            "column": 23,
                             "durationMicroseconds": 0,
-                            "functionName": "verticalAlignment",
-                            "line": 306,
+                            "functionName": "fill",
+                            "line": 307,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 26,
                             "durationMicroseconds": 0,
+                            "functionName": "margins",
+                            "line": 308,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "childColor",
+                            "line": 315,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "childPressColor",
+                            "line": 316,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "alignment",
+                            "line": 312,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 319,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 42,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 321,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 322,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
                             "functionName": "padding",
-                            "line": 307,
+                            "line": 323,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottomPadding",
+                            "line": 324,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "pointSize",
+                            "line": 325,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 331,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 332,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 335,
+                            "message": "Cannot load property childColor from QQuickItem::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 340,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 32,
                             "durationMicroseconds": 0,
-                            "functionName": "bottomPadding",
-                            "line": 308,
+                            "functionName": "width",
+                            "line": 341,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 33,
                             "durationMicroseconds": 0,
-                            "functionName": "pointSize",
-                            "line": 309,
+                            "functionName": "radius",
+                            "line": 342,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 33,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 337,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 338,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitWidth",
+                            "line": 355,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
                             "durationMicroseconds": 0,
                             "functionName": "implicitHeight",
-                            "line": 315,
+                            "line": 356,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 373,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 350,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 351,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 354,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 360,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 362,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 359,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "nameFilters",
+                            "line": 367,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "onAccepted",
+                            "line": 370,
+                            "message": "Cannot access value for name backend"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitWidth",
+                            "line": 384,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 385,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 394,
+                            "message": "Cannot access value for name backend"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 379,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 380,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 383,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 389,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 391,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 388,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitWidth",
+                            "line": 411,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 412,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 421,
+                            "message": "Cannot access value for name backend"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 406,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 407,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 410,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 416,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 418,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 415,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 434,
+                            "message": "Cannot load property childColor from QQuickItem::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 440,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 441,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 442,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 436,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 37,
+                            "durationMicroseconds": 0,
+                            "functionName": "bottom",
+                            "line": 437,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "layoutDirection",
+                            "line": 446,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitWidth",
+                            "line": 456,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 457,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 451,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 452,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 455,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 461,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 463,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 460,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 48,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitWidth",
+                            "line": 475,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "implicitHeight",
+                            "line": 476,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 470,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "radius",
+                            "line": 471,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 50,
+                            "durationMicroseconds": 0,
+                            "functionName": "visible",
+                            "line": 474,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "scale",
+                            "line": 480,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 47,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 482,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 479,
                             "message": ""
                         },
                         {
@@ -850,303 +1354,351 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 316,
+                            "line": 492,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 28,
+                            "column": 24,
                             "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 319,
-                            "message": "Cannot load property childColor from QQuickItem::parent with type QQuickItem."
+                            "functionName": "model",
+                            "line": 501,
+                            "message": "Cannot access value for name modpackModel"
                         },
                         {
                             "codegenResult": 0,
-                            "column": 29,
+                            "column": 27,
                             "durationMicroseconds": 0,
-                            "functionName": "height",
-                            "line": 324,
+                            "functionName": "delegate",
+                            "line": 502,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "minCellWidth",
+                            "line": 503,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "minCellHeight",
+                            "line": 504,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "columns",
+                            "line": 505,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "cellWidth",
+                            "line": 506,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 29,
+                            "durationMicroseconds": 0,
+                            "functionName": "cellHeight",
+                            "line": 507,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 23,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 514,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "sourceItem",
+                            "line": 521,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "sourceRect",
+                            "line": 523,
+                            "message": "Cannot access value for name pageContent"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 522,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 21,
+                            "durationMicroseconds": 0,
+                            "functionName": "source",
+                            "line": 530,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 325,
+                            "line": 538,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 29,
+                            "column": 21,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 539,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 529,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "acceptedButtons",
+                            "line": 544,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 22,
+                            "durationMicroseconds": 0,
+                            "functionName": "onWheel",
+                            "line": 547,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 22,
+                            "durationMicroseconds": 0,
+                            "functionName": "onWheel",
+                            "line": 547,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 550,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 543,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 20,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 556,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 21,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 326,
+                            "line": 558,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 555,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "acceptedButtons",
+                            "line": 565,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 31,
                             "durationMicroseconds": 0,
-                            "functionName": "left",
-                            "line": 321,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 33,
-                            "durationMicroseconds": 0,
-                            "functionName": "bottom",
-                            "line": 322,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitWidth",
-                            "line": 339,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 340,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 357,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 334,
-                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
-                            "functionName": "radius",
-                            "line": 335,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 338,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
-                            "line": 344,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 346,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 343,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "nameFilters",
-                            "line": 351,
+                            "line": 564,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 45,
+                            "column": 24,
                             "durationMicroseconds": 0,
-                            "functionName": "onAccepted",
-                            "line": 354,
-                            "message": "Cannot access value for name backend"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitWidth",
-                            "line": 368,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 369,
-                            "message": ""
+                            "functionName": "width",
+                            "line": 575,
+                            "message": "Cannot load property modalPadding from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
                             "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 378,
-                            "message": "Cannot access value for name backend"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 363,
-                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
-                            "functionName": "radius",
-                            "line": 364,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 367,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
-                            "line": 373,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 375,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 372,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitWidth",
-                            "line": 395,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 396,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "onClicked",
-                            "line": 405,
-                            "message": "Cannot access value for name backend"
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 390,
-                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
-                            "functionName": "radius",
-                            "line": 391,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 394,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
-                            "line": 400,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 402,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 399,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 28,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 418,
-                            "message": "Cannot load property childColor from QQuickItem::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 29,
+                            "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "height",
-                            "line": 424,
+                            "line": 576,
+                            "message": "Cannot load property modalPadding from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 577,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 34,
+                            "durationMicroseconds": 0,
+                            "functionName": "spacing",
+                            "line": 583,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 38,
+                            "durationMicroseconds": 0,
+                            "functionName": "spacing",
+                            "line": 586,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 43,
+                            "durationMicroseconds": 0,
+                            "functionName": "fillMode",
+                            "line": 593,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 41,
+                            "durationMicroseconds": 0,
+                            "functionName": "source",
+                            "line": 594,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "alignment",
+                            "line": 590,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "elide",
+                            "line": 600,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 601,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 40,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 603,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 54,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 604,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 51,
+                            "durationMicroseconds": 0,
+                            "functionName": "alignment",
+                            "line": 598,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 49,
+                            "durationMicroseconds": 0,
+                            "functionName": "pointSize",
+                            "line": 602,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 609,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 24,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 631,
+                            "message": "Cannot load property modalPadding from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 25,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 632,
+                            "message": "Cannot load property modalPadding from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "centerIn",
+                            "line": 633,
                             "message": ""
                         },
                         {
@@ -1154,15 +1706,23 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 425,
+                            "line": 646,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 29,
                             "durationMicroseconds": 0,
-                            "functionName": "radius",
-                            "line": 426,
+                            "functionName": "height",
+                            "line": 647,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onClicked",
+                            "line": 649,
                             "message": ""
                         },
                         {
@@ -1170,215 +1730,87 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 420,
+                            "line": 638,
                             "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "top",
+                            "line": 639,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 643,
+                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
                         },
                         {
                             "codegenResult": 0,
                             "column": 33,
                             "durationMicroseconds": 0,
-                            "functionName": "bottom",
-                            "line": 421,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 42,
-                            "durationMicroseconds": 0,
-                            "functionName": "layoutDirection",
-                            "line": 430,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitWidth",
-                            "line": 440,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 441,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 435,
-                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 436,
+                            "line": 644,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 439,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
+                            "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "scale",
-                            "line": 445,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 447,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 444,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 44,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitWidth",
-                            "line": 459,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 45,
-                            "durationMicroseconds": 0,
-                            "functionName": "implicitHeight",
-                            "line": 460,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 454,
-                            "message": "Cannot load property down from (component in /home/dat-bogie/ModpackUpdateManager/src/Main.qml)::parent with type QQuickItem."
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
-                            "functionName": "radius",
-                            "line": 455,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 46,
-                            "durationMicroseconds": 0,
-                            "functionName": "visible",
-                            "line": 458,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "scale",
-                            "line": 464,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 43,
-                            "durationMicroseconds": 0,
-                            "functionName": "fillMode",
-                            "line": 466,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 47,
-                            "durationMicroseconds": 0,
-                            "functionName": "fill",
-                            "line": 463,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 20,
-                            "durationMicroseconds": 0,
-                            "functionName": "color",
-                            "line": 476,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 2,
-                            "column": 20,
-                            "durationMicroseconds": 0,
-                            "functionName": "model",
-                            "line": 485,
-                            "message": "Cannot access value for name modpackModel"
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 23,
-                            "durationMicroseconds": 0,
-                            "functionName": "delegate",
-                            "line": 486,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 40,
-                            "durationMicroseconds": 0,
-                            "functionName": "minCellWidth",
-                            "line": 487,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 41,
-                            "durationMicroseconds": 0,
-                            "functionName": "minCellHeight",
-                            "line": 488,
+                            "line": 655,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
                             "column": 35,
                             "durationMicroseconds": 0,
-                            "functionName": "columns",
-                            "line": 489,
+                            "functionName": "fillMode",
+                            "line": 657,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 24,
+                            "column": 39,
                             "durationMicroseconds": 0,
-                            "functionName": "cellWidth",
-                            "line": 490,
+                            "functionName": "fill",
+                            "line": 654,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
-                            "column": 25,
+                            "column": 32,
                             "durationMicroseconds": 0,
-                            "functionName": "cellHeight",
-                            "line": 491,
+                            "functionName": "scale",
+                            "line": 661,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 33,
+                            "durationMicroseconds": 0,
+                            "functionName": "source",
+                            "line": 663,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "colorizationColor",
+                            "line": 665,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 662,
                             "message": ""
                         }
                     ],

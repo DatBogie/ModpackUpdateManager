@@ -22,9 +22,6 @@ int main(int argc, char *argv[])
     else
         backend.ignoredInstances = ignoredInstances.toStringList();
 
-    backend.model.addInstance({"Homer Modpack", "giphy.gif", "/home/dat-bogie/Downloads/", true, false, true});
-    backend.model.addInstance({"External Modpack", "album_2025-08-04_00-20-32.gif", "/home/dat-bogie/Pictures/", false, false});
-
     backend.findPrismPath();
     backend.loadPrismInstances();
 
