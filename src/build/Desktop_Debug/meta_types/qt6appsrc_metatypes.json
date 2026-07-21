@@ -87,7 +87,7 @@
                             }
                         ],
                         "index": 1,
-                        "lineNumber": 25,
+                        "lineNumber": 28,
                         "name": "removeInstance",
                         "returnType": "void"
                     }

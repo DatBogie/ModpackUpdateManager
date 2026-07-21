@@ -17,7 +17,10 @@ class ModpackModel : public QAbstractListModel {
             ThumbnailParentPathRole,
             EnabledRole,
             FromPrismRole,
-            IsCompatibleRole
+            IsCompatibleRole,
+            UpdateUrlRole,
+            CurrentVersionIdRole,
+            CurrentVersionTypeRole
         };
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
         QVariant data(const QModelIndex &index, int role) const override;

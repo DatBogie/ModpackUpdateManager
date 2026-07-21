@@ -48,6 +48,11 @@ ApplicationWindow {
     property real globalIconScale: .8
     property real globalModpackScale: .85
     property int globalHeaderSize: 18
+    property int globalTextSize: 14
+
+    function capitalizeFirst(x) {
+        return x.substring(0,1).toUpperCase()+x.substring(1);
+    }
 
     color: window.crust
 
@@ -148,6 +153,10 @@ ApplicationWindow {
                                         modpackDetails.enabled = true;
                                         modpackDetails.instanceName = name;
                                         modpackDetails.thumbnailSource = "file:/"+thumbnailParentPath+thumbnailKey;
+                                        modpackDetails.isCompatible = isCompatible
+                                        modpackDetails.updateUrl = !isCompatible? "" : updateUrl;
+                                        modpackDetails.currentVersionId = !isCompatible? "" : currentVersionId;
+                                        modpackDetails.currentVersionType = !isCompatible? "" : currentVersionType;
                                     }
 
                                     contentItem: Image {
@@ -520,7 +529,7 @@ ApplicationWindow {
             id: modalBackdrop
             sourceItem: windowContent
             anchors.fill: parent
-            sourceRect: Qt.rect(0, 0, pageContent.width, pageContent.height)
+            sourceRect: Qt.rect(0, 0, window.width, window.height)
             live: true
             hideSource: false
         }
@@ -571,6 +580,10 @@ ApplicationWindow {
 
                 property string instanceName: "N/A"
                 property string thumbnailSource: ""
+                property bool isCompatible: false
+                property string updateUrl: ""
+                property string currentVersionId: ""
+                property string currentVersionType: ""
 
                 width: parent.width-parent.modalPadding
                 height: parent.height-parent.modalPadding
@@ -587,8 +600,9 @@ ApplicationWindow {
 
                             AnimatedImage {
                                 id: thumbnail
+                                property int preferredWidth: 300
                                 Layout.alignment: Qt.AlignTop
-                                Layout.preferredWidth: 300
+                                Layout.preferredWidth: preferredWidth
                                 Layout.preferredHeight: 150
                                 fillMode: Image.PreserveAspectFit
                                 source: modpackDetails.thumbnailSource
@@ -596,7 +610,7 @@ ApplicationWindow {
 
                             Text {
                                 Layout.alignment: Qt.AlignTop
-                                Layout.fillWidth: true
+                                Layout.preferredWidth: thumbnail.preferredWidth
                                 elide: Text.ElideRight
                                 text: modpackDetails.instanceName
                                 font.pointSize: window.globalHeaderSize
@@ -608,7 +622,26 @@ ApplicationWindow {
                         Rectangle {
                             color: window.text
                             height: 1
-                            Layout.fillWidth: true
+                            Layout.preferredWidth: thumbnail.preferredWidth
+                        }
+
+                        Text {
+                            property bool linkHover: false
+                            visible: modpackDetails.isCompatible
+                            Layout.preferredWidth: thumbnail.preferredWidth
+                            wrapMode: Text.Wrap
+                            text: `Version: ${window.capitalizeFirst(modpackDetails.currentVersionType)} ${modpackDetails.currentVersionId}  \nUpdate Host Url: [GitHub](${modpackDetails.updateUrl})`
+                            textFormat: Text.MarkdownText
+                            font.pointSize: window.globalTextSize
+                            color: window.text
+                            horizontalAlignment: Text.AlignLeft
+                            onLinkHovered: link=>{ linkHover = link !== "" }
+                            onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+
+                            HoverHandler {
+                                cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.ArrowCursor
+                            }
+
                         }
                     }
 
@@ -649,7 +682,7 @@ ApplicationWindow {
                     onClicked: modalBackground.visible = false
 
                     contentItem: Image {
-                        id: infoBtnIcon
+                        id: closeModalBtnIcon
                         visible: false
                         anchors.fill: parent
                         scale: window.globalIconScale
@@ -658,9 +691,9 @@ ApplicationWindow {
                     }
 
                     MultiEffect {
-                        scale: infoBtnIcon.scale
-                        anchors.fill: infoBtnIcon
-                        source: infoBtnIcon
+                        scale: closeModalBtnIcon.scale
+                        anchors.fill: closeModalBtnIcon
+                        source: closeModalBtnIcon
                         colorization: 1.0
                         colorizationColor: window.red
                     }

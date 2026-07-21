@@ -42,6 +42,12 @@ QVariant ModpackModel::data(const QModelIndex &index, int role) const {
             return mi.fromPrism;
         case IsCompatibleRole:
             return mi.isCompatible;
+        case UpdateUrlRole:
+            return mi.updateUrl;
+        case CurrentVersionIdRole:
+            return mi.currentVersionId;
+        case CurrentVersionTypeRole:
+            return mi.currentVersionType;
     }
     return {};
 }
@@ -53,7 +59,10 @@ QHash<int, QByteArray> ModpackModel::roleNames() const {
         { ThumbnailParentPathRole, "thumbnailParentPath" },
         { EnabledRole, "packEnabled" },
         { FromPrismRole, "fromPrism" },
-        { IsCompatibleRole, "isCompatible" }
+        { IsCompatibleRole, "isCompatible" },
+        { UpdateUrlRole, "updateUrl" },
+        { CurrentVersionIdRole, "currentVersionId" },
+        { CurrentVersionTypeRole, "currentVersionType" }
     };
 }
 

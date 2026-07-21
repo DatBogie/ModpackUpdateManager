@@ -9,4 +9,7 @@ struct ModpackInstance {
     bool packEnabled = false;
     bool fromPrism = true;
     bool isCompatible = false;
+    QString updateUrl;
+    QString currentVersionId = "1.0";
+    QString currentVersionType = "release";
 };

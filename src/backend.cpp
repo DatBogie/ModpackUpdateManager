@@ -5,6 +5,9 @@
 #include <QList>
 #include <QDebug>
 #include <QUrl>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 #include <quazip/quazip.h>
 #include <quazip/quazipfile.h>
@@ -57,8 +60,27 @@ void Backend::addInstance(QString dir) {
         thumbKey = "icon.png";
         thumbParentPath = dir+"/minecraft/";
     }
-    bool isCompatible = QFile(dir+"/.modpackupdatemanager.json").exists();
-    model.addInstance({ name, thumbKey, thumbParentPath, isCompatible, true, isCompatible });
+    QFile updateDef(dir+"/.modpackupdatemanager.json");
+    bool isCompatible = false;
+    QString updateUrl;
+    QString currentVersionId;
+    QString currentVersionType;
+    if (updateDef.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        isCompatible = true;
+        QByteArray data = updateDef.readAll();
+        updateDef.close();
+        QJsonParseError error;
+        QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+        if (error.error == QJsonParseError::NoError) {
+            QJsonObject obj = doc.object();
+            updateUrl = obj["UpdateUrl"].toString();
+            currentVersionId = obj["VersionId"].toString();
+            currentVersionType = obj["VersionType"].toString();
+        } else {
+            qWarning() << "Json parse error whilst loading '" << dir << "/.modpackupdatemanager.json': " << error.errorString();
+        }
+    }
+    model.addInstance({ name, thumbKey, thumbParentPath, isCompatible, true, isCompatible, updateUrl, currentVersionId, currentVersionType });
 }
 
 void Backend::loadPrismInstances() {
