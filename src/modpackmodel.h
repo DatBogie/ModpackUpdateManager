@@ -20,12 +20,19 @@ class ModpackModel : public QAbstractListModel {
             IsCompatibleRole,
             UpdateUrlRole,
             CurrentVersionIdRole,
-            CurrentVersionTypeRole
+            CurrentVersionTypeRole,
+            PendingUpdateRole,
+            InstancePathRole
         };
+        Qt::ItemFlags flags(const QModelIndex &index) const override;
         int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        QVariantMap ModpackCheckUpdateResponseToQVariantMap(ModpackCheckUpdateResponse pu) const;
+        ModpackCheckUpdateResponse QVariantMapToModpackCheckUpdateResponse(QVariantMap ccvpu);
         QVariant data(const QModelIndex &index, int role) const override;
+        bool setData(const QModelIndex &index, const QVariant &value, int role) override;
         QHash<int, QByteArray> roleNames() const override;
-        Q_INVOKABLE void removeInstance(int index);
+        void removeInstance(int index);
+        bool setRoleProperty(int index, int role, QVariant value);
         int findNextPrismIndex();
         ModpackInstance instanceAt(int index);
 

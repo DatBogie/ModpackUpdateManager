@@ -2,6 +2,8 @@
 
 #include <QString>
 
+#include "modpackcheckupdateresponse.h"
+
 struct ModpackInstance {
     QString name;
     QString thumbnailKey;
@@ -12,4 +14,6 @@ struct ModpackInstance {
     QString updateUrl;
     QString currentVersionId = "1.0";
     QString currentVersionType = "release";
+    QString instancePath;
+    ModpackCheckUpdateResponse pendingUpdate;
 };

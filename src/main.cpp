@@ -5,6 +5,8 @@
 
 #include "backend.h"
 
+#include <git2.h>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -15,12 +17,19 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("datbogie.org");
     QCoreApplication::setOrganizationName("Modpack Update Manager");
 
+    git_libgit2_init();
+
     Backend backend;
     QVariant ignoredInstances = backend.settings.value("IgnoredModpacks");
     if (!ignoredInstances.isValid())
         backend.settings.setValue("IgnoredModpacks", backend.ignoredInstances);
     else
         backend.ignoredInstances = ignoredInstances.toStringList();
+    QVariant autoUpdateInstances = backend.settings.value("AutoUpdatingModpacks");
+    if (!autoUpdateInstances.isValid())
+        backend.settings.setValue("AutoUpdatingModpacks", backend.autoUpdateInstances);
+    else
+        backend.autoUpdateInstances = autoUpdateInstances.toStringList();
 
     backend.findPrismPath();
     backend.loadPrismInstances();
@@ -36,5 +45,9 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
     engine.loadFromModule("src", "Main");
 
-    return QGuiApplication::exec();
+    int exitCode = QGuiApplication::exec();
+
+    git_libgit2_shutdown();
+
+    return exitCode;
 }

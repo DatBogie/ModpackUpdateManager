@@ -54,7 +54,491 @@ ApplicationWindow {
         return x.substring(0,1).toUpperCase()+x.substring(1);
     }
 
+    function pt2px(pt) {
+        return pt*(1/.75);
+    }
+
     color: window.crust
+
+    Window {
+        id: globalSetupWizardWindow
+        visible: false
+        property var mi: ({ index: 0, name: "", thumbnailKey: "", thumbnailParentPath: "", packEnabled: false, fromPrism: true, isCompatible: false, updateUrl: "", currentVersionId: "", currentVersionType: "", instancePath: "" });
+        title: `${mi.name} — Modpack Setup Wizard`
+        width: 600
+        height: 400
+        minimumWidth: width
+        minimumHeight: height
+        maximumWidth: width
+        maximumHeight: height
+        color: window.color
+
+        onVisibleChanged: {
+            if (!visible) {
+                globalSetupWizard.currentIndex = 0;
+                return;
+            }
+            globalSetupWizardUrl.text = "";
+            globalSetupWizardVersionId.text = "";
+        }
+
+        property color childColor: window.surface0
+        property color childPressColor: window.surface1
+
+        Item {
+            width: parent.width-window.globalPadding*2
+            height: parent.height-window.globalPadding*2
+            anchors.centerIn: parent
+
+            Rectangle {
+                id: globalSetupWizardNavbar
+                property real textSize: window.globalTextSize
+                color: window.base
+                height: textSize*2;
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+                radius: window.globalBorderRadius
+
+                Text {
+                    anchors {
+                        left: parent.left
+                        right: globalSetupWizardNavbarTicker.left
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    color: window.text
+                    text: `${globalSetupWizardWindow.mi.name} — ${globalSetupWizard.currentItem.pageTitle}`
+                    elide: Text.ElideMiddle
+                    ToolTip.text: text
+                    ToolTip.visible: globalSetupWizardNavbarTitleMs.containsMouse
+                    font.pointSize: globalSetupWizardNavbar.textSize
+                    horizontalAlignment: Text.AlignHCenter
+                    leftPadding: window.globalPadding
+                    rightPadding: window.globalPadding
+                    MouseArea {
+                        id: globalSetupWizardNavbarTitleMs
+                        anchors.fill: parent
+                        hoverEnabled: true
+                    }
+                }
+
+                Text {
+                    id: globalSetupWizardNavbarTicker
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    color: window.text
+                    text: `(${globalSetupWizard.currentIndex+1}/${globalSetupWizard.count})`
+                    font.pointSize: globalSetupWizardNavbar.textSize
+                    horizontalAlignment: Text.AlignRight
+                    leftPadding: window.globalPadding
+                    rightPadding: window.globalPadding
+                }
+            }
+
+            Rectangle {
+                color: window.crust
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: globalSetupWizardNavbar.bottom
+                    bottom: globalSetupWizardControls.parent.top
+                }
+
+                SwipeView {
+                    id: globalSetupWizard
+                    interactive: false
+                    anchors.fill: parent
+                    clip: true
+
+                    Item {
+                        property string pageTitle: "Linking a GitHub Repository"
+                        Column {
+                            width: parent.width
+                            height: parent.height-window.globalPadding*2
+                            anchors {
+                                centerIn: parent
+                            }
+                            spacing: window.globalPadding
+
+                            TextEdit {
+                                property bool linkHover: false
+                                width: parent.width
+                                textFormat: Text.MarkdownText
+                                text: "1. Go to [_GitHub_](https://github.com/signup)\n2. [_Create a *public* repository_](https://github.com/new). Its name doesn't matter!\n3. Copy the url and paste it in the box below.\n4. Click the `Add file` dropdown, then click `Create new file`.\n5. Name it `modpackupdatemanager.json`, then copy the code from [_here_](https://raw.githubusercontent.com/DatBogie/ModpackUpdateManager-ExamplePack/refs/heads/main/modpackupdatemanager.json) and paste it into the editor, then press `Commit changes` twice."
+                                wrapMode: Text.Wrap
+                                color: window.text
+                                onLinkHovered: link=>{ linkHover = link !== "" }
+                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                font.pointSize: window.globalTextSize
+                                topPadding: window.globalPadding
+                                readOnly: true
+
+                                HoverHandler {
+                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                }
+                            }
+
+                            TextField {
+                                property string outputText: text === ""? "1.0.1" : text
+                                id: globalSetupWizardUrl
+                                placeholderText: "Enter GitHub Repo Url (eg. https://github.com/<user>/<name>)..."
+                                width: parent.width
+                                background: Rectangle {
+                                    color: globalSetupWizardWindow.childColor
+                                    radius: window.globalBorderRadius
+                                }
+                            }
+                        }
+                    }
+
+                    Item {
+                        property string pageTitle: "Creating New Versions"
+                        Column {
+                            width: parent.width
+                            height: parent.height-window.globalPadding*2
+                            anchors {
+                                centerIn: parent
+                            }
+                            spacing: window.globalPadding
+
+                            TextField {
+                                property string outputText: text === ""? "1.0.1" : text
+                                id: globalSetupWizardVersionId
+                                placeholderText: "Enter new Version Id (eg. 1.0.1)..."
+                                width: parent.width
+                                background: Rectangle {
+                                    color: globalSetupWizardWindow.childColor
+                                    radius: window.globalBorderRadius
+                                }
+                            }
+
+                            TextEdit {
+                                property bool linkHover: false
+                                width: parent.width
+                                textFormat: Text.MarkdownText
+                                text: `1. Go to the root of your repo.\n2. Create a new file called \`versions/${globalSetupWizardVersionId.outputText}/mods/.DS_Store\` and commit.\n3. Click \`Upload files\` under \`Add file\` and upload any mods you're adding to or updating in this new version!`
+                                wrapMode: Text.Wrap
+                                color: window.text
+                                onLinkHovered: link=>{ linkHover = link !== "" }
+                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                font.pointSize: window.globalTextSize
+                                readOnly: true
+
+                                HoverHandler {
+                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                }
+                            }
+                        }
+                    }
+
+                    Item {
+                        property string pageTitle: "Done!"
+                        Text {
+                            property bool linkHover: false
+                            width: parent.width
+                            textFormat: Text.MarkdownText
+                            text: "- Click `Finish` below to complete the setup."
+                            wrapMode: Text.Wrap
+                            color: window.text
+                            onLinkHovered: link=>{ linkHover = link !== "" }
+                            onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                            font.pointSize: window.globalTextSize
+                            topPadding: window.globalPadding
+
+                            HoverHandler {
+                                cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                            }
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                color: window.base
+                height: window.globalCtrlSize+window.globalPadding*2
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+                radius: window.globalBorderRadius
+
+                RowLayout {
+                    id: globalSetupWizardControls
+                    spacing: window.globalPadding
+                    height: window.globalCtrlSize
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        centerIn: parent
+                    }
+
+                    Button {
+                        id: globalSetupWizardBackBtn
+                        visible: globalSetupWizard.currentIndex > 0
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Back"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalSetupWizardWindow.childColor : globalSetupWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: {
+                            globalSetupWizard.currentIndex--;
+                        }
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/arrow_left_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignLeft
+                                color: window.text
+                                rightPadding: window.globalPadding
+                            }
+                        }
+                    }
+
+                    Button {
+                        id: globalSetupWizardNextBtn
+                        visible: (globalSetupWizard.currentIndex !== 0 || globalSetupWizardUrl.text.startsWith("https://github.com/")) && (globalSetupWizard.currentIndex < globalSetupWizard.count-1)
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Next"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalSetupWizardWindow.childColor : globalSetupWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: globalSetupWizard.currentIndex++
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignRight
+                                color: window.text
+                                leftPadding: window.globalPadding
+                            }
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/arrow_right_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                        }
+                    }
+
+                    Button {
+                        id: globalSetupWizardFinishBtn
+                        visible: globalSetupWizard.currentIndex >= globalSetupWizard.count-1
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Finish"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalSetupWizardWindow.childColor : globalSetupWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: {
+                            globalSetupWizardWindow.visible = false;
+                            globalSetupWizardWindow.mi.updateUrl = globalSetupWizardUrl.text;
+                            backend.setUpdateUrlProperty(globalSetupWizardWindow.mi.index, globalSetupWizardWindow.mi.updateUrl);
+                            globalMessageDialog.title = globalSetupWizardWindow.title;
+                            globalMessageDialog.text = `## ${globalSetupWizardWindow.mi.name}\n\n --- \n\n**Setup ${backend.setupPack(globalSetupWizardWindow.mi)? "Completed Successfully!" : "Failed!"}**`;
+                            globalMessageDialog.visible = true;
+                        }
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                                MultiEffect {
+                                    anchors.fill: parent
+                                    source: parent
+                                    colorization: 1.0
+                                    colorizationColor: window.green
+                                }
+                            }
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignLeft
+                                color: window.text
+                                rightPadding: window.globalPadding
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Window {
+        id: globalMessageDialog
+        visible: false
+        property string text: ""
+        property color childColor: window.surface0
+        property color childPressColor: window.surface1
+        width: 600
+        height: 350
+        minimumWidth: width
+        minimumHeight: height
+        maximumWidth: width
+        maximumHeight: height
+        color: window.color
+
+        Item {
+            width: parent.width-window.globalPadding*2
+            height: parent.height-window.globalPadding*2
+            anchors.centerIn: parent
+
+            ScrollView {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                    bottom: globalMessageDialogControls.top
+                }
+
+                Text {
+                    property bool linkHover: false
+                    width: parent.width
+                    textFormat: Text.MarkdownText
+                    text: globalMessageDialog.text
+                    wrapMode: Text.Wrap
+                    color: window.text
+                    onLinkHovered: link=>{ linkHover = link !== "" }
+                    onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                    font.pointSize: window.globalTextSize
+                    topPadding: window.globalPadding
+
+                    HoverHandler {
+                        cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.ArrowCursor
+                    }
+                }
+            }
+
+            RowLayout {
+                id: globalMessageDialogControls
+                height: window.globalCtrlSize
+                spacing: window.globalPadding
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+
+                Item { Layout.fillWidth: true }
+
+                Button {
+                    id: globalMessageDialogOKBtn
+                    padding: 0
+                    property string btnText: "Okay"
+                    Layout.fillHeight: true
+                    background: Rectangle {
+                        color: !parent.down? globalMessageDialog.childColor : globalMessageDialog.childPressColor
+                        radius: window.globalBorderRadius
+                    }
+                    onClicked: globalMessageDialog.visible = false
+
+                    contentItem: RowLayout {
+                        height: parent.height
+                        spacing: 0
+
+                        Image {
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: height
+                            scale: window.globalIconScale
+                            source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                            fillMode: Image.PreserveAspectFit
+                            MultiEffect {
+                                anchors.fill: parent
+                                source: parent
+                                colorization: 1.0
+                                colorizationColor: window.green
+                            }
+                        }
+
+                        Text {
+                            text: parent.parent.btnText
+                            horizontalAlignment: Text.AlignLeft
+                            color: window.text
+                            rightPadding: window.globalPadding
+                        }
+                    }
+                }
+
+                Button {
+                    id: globalMessageDialogCloseBtn
+                    visible: false
+                    enabled: visible
+                    padding: 0
+                    property string btnText: "Close"
+                    Layout.fillHeight: true
+                    background: Rectangle {
+                        color: !parent.down? globalMessageDialog.childColor : globalMessageDialog.childPressColor
+                        radius: window.globalBorderRadius
+                    }
+                    onClicked: globalMessageDialog.visible = false
+
+                    contentItem: RowLayout {
+                        height: parent.height
+                        spacing: 0
+
+                        Image {
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: height
+                            scale: window.globalIconScale
+                            source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                            fillMode: Image.PreserveAspectFit
+                            MultiEffect {
+                                anchors.fill: parent
+                                source: parent
+                                colorization: 1.0
+                                colorizationColor: window.red
+                            }
+                        }
+
+                        Text {
+                            text: parent.parent.btnText
+                            horizontalAlignment: Text.AlignLeft
+                            color: window.text
+                            rightPadding: window.globalPadding
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     Component {
         id: modpackGridItem
@@ -138,6 +622,34 @@ ApplicationWindow {
                                 spacing: 0
 
                                 Button {
+                                    id: compat
+                                    visible: !isCompatible
+                                    enabled: visible
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    ToolTip.text: "Setup Modpack Updates..."
+                                    ToolTip.visible: hovered
+                                    implicitWidth: window.globalCtrlSize
+
+                                    onClicked: {
+                                        const mi = parent.genmiDict();
+                                        mi.index = index;
+                                        globalSetupWizardWindow.mi = mi;
+                                        globalSetupWizardWindow.visible = true;
+                                    }
+
+                                    contentItem: Image {
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/add_task_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+                                }
+
+                                Button {
                                     id: info
                                     Layout.fillHeight: true
                                     background: Rectangle {
@@ -177,25 +689,62 @@ ApplicationWindow {
                                     }
                                 }
 
+                                function genmi(includeUpdate=true) {
+                                    return [ name, thumbnailKey, thumbnailParentPath, packEnabled, fromPrism, isCompatible, updateUrl, currentVersionId, currentVersionType, instancePath, includeUpdate? pendingUpdate : undefined ];
+                                }
+
+                                function genmiDict() {
+                                    return { name: name, thumbnailKey: thumbnailKey, thumbnailParentPath: thumbnailParentPath, packEnabled: packEnabled, fromPrism: fromPrism, isCompatible: isCompatible, updateUrl: updateUrl, currentVersionId: currentVersionId, currentVersionType: currentVersionType, instancePath: instancePath };
+                                }
+
+                                function updateInstance(mi) {
+                                    console.log(mi);
+                                    const updateResponse = backend.qmlUpdateInstance(mi);
+                                    globalMessageDialog.title = `${name} — Modpack Update Fetcher`;
+                                    globalMessageDialog.text = `## ${name} \n\n --- \n\n` + (updateResponse.success? `**Update successful!**  \n"${updateResponse.updateName}" (${updateResponse.updateId})  \n${updateResponse.updateDesc}` : "**Update failed!**  \nCheck the log for more info.");
+                                    globalMessageDialog.visible = true;
+                                    if (updateResponse.success) {
+                                        backend.setPendingUpdateProperty(index, { hasUpdate: false });
+                                        backend.setCurrentVersionIdProperty(index, updateResponse.updateId);
+                                        backend.setCurrentVersionTypeProperty(index, updateResponse.updateType);
+                                    }
+
+                                    return updateResponse;
+                                }
+
                                 Button {
                                     id: updateCheck
                                     visible: isCompatible
-                                    enabled: isCompatible
+                                    enabled: visible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    ToolTip.text: "Check for Updates"
+
+                                    ToolTip.text: "Check for Updates"+(update.trulyEnabled? "" : " & Update")
                                     ToolTip.visible: hovered
                                     implicitWidth: window.globalCtrlSize
+
+                                    onClicked: {
+                                        const mi = parent.genmi(false);
+                                        const response = backend.qmlCheckUpdate(mi);
+                                        backend.setPendingUpdateProperty(index, response);
+                                        globalMessageDialog.title = `${name} — Modpack Update Fetcher`;
+                                        globalMessageDialog.text = `## ${name}\n\n --- \n\n` + (response.hasUpdate? `**Pending update:** "${response.updateName}" (${response.updateId})  \n${response.updateDesc}` : "No updates found!");
+                                        if (update.trulyEnabled || !response.hasUpdate) {
+                                            globalMessageDialog.visible = true;
+                                            return;
+                                        }
+                                        parent.updateInstance(parent.genmi());
+                                    }
 
                                     contentItem: Image {
                                         id: updateCheckBtnIcon
                                         visible: false
                                         anchors.fill: parent
                                         scale: window.globalIconScale
-                                        source: "assets/update_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        source: update.trulyEnabled? "assets/update_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" : "assets/update-download_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
                                         fillMode: Image.PreserveAspectFit
                                     }
 
@@ -210,16 +759,22 @@ ApplicationWindow {
 
                                 Button {
                                     id: update
-                                    visible: isCompatible
-                                    enabled: isCompatible
+                                    property bool trulyEnabled: isCompatible && !packEnabled;
+                                    visible: pendingUpdate.hasUpdate && (isCompatible && !packEnabled)
+                                    enabled: visible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    ToolTip.text: "Update"
+                                    ToolTip.text: "Update" + (pendingUpdate.hasUpdate? " (Pending)" : "")
                                     ToolTip.visible: hovered
                                     implicitWidth: window.globalCtrlSize
+
+                                    onClicked: {
+                                        const mi = parent.genmi();
+                                        parent.updateInstance(mi);
+                                    }
 
                                     contentItem: Image {
                                         id: updateBtnIcon
@@ -233,13 +788,14 @@ ApplicationWindow {
                                 Button {
                                     id: enabled
                                     visible: isCompatible
-                                    enabled: isCompatible
+                                    enabled: visible
                                     Layout.fillHeight: true
                                     background: Rectangle {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    onClicked: packEnabled = !packEnabled
+                                    onClicked: backend.setEnabledProperty(index, !packEnabled, name)
+
                                     ToolTip.text: "Modpack Auto-Updates: "+(packEnabled? "Enabled" : "Disabled")
                                     ToolTip.visible: hovered
                                     implicitWidth: window.globalCtrlSize
@@ -630,7 +1186,7 @@ ApplicationWindow {
                             visible: modpackDetails.isCompatible
                             Layout.preferredWidth: thumbnail.preferredWidth
                             wrapMode: Text.Wrap
-                            text: `Version: ${window.capitalizeFirst(modpackDetails.currentVersionType)} ${modpackDetails.currentVersionId}  \nUpdate Host Url: [GitHub](${modpackDetails.updateUrl})`
+                            text: `Version: ${window.capitalizeFirst(modpackDetails.currentVersionType)} ${modpackDetails.currentVersionId}  \nUpdate Host Url: [_GitHub_](${modpackDetails.updateUrl})`
                             textFormat: Text.MarkdownText
                             font.pointSize: window.globalTextSize
                             color: window.text

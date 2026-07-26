@@ -27,6 +27,23 @@ int ModpackModel::rowCount(const QModelIndex &) const {
     return instanceVec.size();
 }
 
+QVariantMap ModpackModel::ModpackCheckUpdateResponseToQVariantMap(ModpackCheckUpdateResponse pu) const {
+    QVariantMap cvpu = {
+        { "hasUpdate", pu.hasUpdate },
+        { "updateId", pu.updateId },
+        { "updateType", pu.updateType },
+        { "updateName", pu.updateName },
+        { "updateDesc", pu.updateDesc },
+        { "changelog", pu.changelog }
+    };
+    return cvpu;
+}
+
+ModpackCheckUpdateResponse ModpackModel::QVariantMapToModpackCheckUpdateResponse(QVariantMap cvpu) {
+    ModpackCheckUpdateResponse pu = { cvpu["updateId"].toString(), cvpu["updateType"].toString(), cvpu["updateName"].toString(), cvpu["updateDesc"].toString(), cvpu["changelog"].toList(), cvpu["hasUpdate"].toBool() };
+    return pu;
+}
+
 QVariant ModpackModel::data(const QModelIndex &index, int role) const {
     const ModpackInstance &mi = instanceVec[index.row()];
     switch (role) {
@@ -48,6 +65,10 @@ QVariant ModpackModel::data(const QModelIndex &index, int role) const {
             return mi.currentVersionId;
         case CurrentVersionTypeRole:
             return mi.currentVersionType;
+        case PendingUpdateRole:
+            return ModpackCheckUpdateResponseToQVariantMap(mi.pendingUpdate);
+        case InstancePathRole:
+            return mi.instancePath;
     }
     return {};
 }
@@ -62,10 +83,49 @@ QHash<int, QByteArray> ModpackModel::roleNames() const {
         { IsCompatibleRole, "isCompatible" },
         { UpdateUrlRole, "updateUrl" },
         { CurrentVersionIdRole, "currentVersionId" },
-        { CurrentVersionTypeRole, "currentVersionType" }
+        { CurrentVersionTypeRole, "currentVersionType" },
+        { PendingUpdateRole, "pendingUpdate" },
+        { InstancePathRole, "instancePath" }
     };
 }
 
 ModpackInstance ModpackModel::instanceAt(int index) {
     return instanceVec[index];
+}
+
+Qt::ItemFlags ModpackModel::flags(const QModelIndex &index) const {
+    return QAbstractListModel::flags(index) | Qt::ItemIsEditable;
+}
+
+bool ModpackModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if (!index.isValid()) return false;
+    auto &instance = instanceVec[index.row()];
+    switch (role) {
+        case IsCompatibleRole:
+            instance.isCompatible = value.toBool();
+            break;
+        case EnabledRole:
+            instance.packEnabled = value.toBool();
+            break;
+        case UpdateUrlRole:
+            instance.updateUrl = value.toString();
+            break;
+        case CurrentVersionIdRole:
+            instance.currentVersionId = value.toString();
+            break;
+        case CurrentVersionTypeRole:
+            instance.currentVersionType = value.toString();
+            break;
+        case PendingUpdateRole:
+            instance.pendingUpdate = QVariantMapToModpackCheckUpdateResponse(value.toMap());
+            break;
+        default:
+            return false;
+    }
+    emit dataChanged(index, index, { role });
+    return true;
+}
+
+bool ModpackModel::setRoleProperty(int index, int role, QVariant value) {
+    return setData(this->index(index, 0), value, role);
 }

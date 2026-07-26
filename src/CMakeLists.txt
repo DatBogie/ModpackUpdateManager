@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(QuaZip-Qt6 REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(LIBGIT2 REQUIRED libgit2)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -38,6 +41,9 @@ qt_add_qml_module(appsrc
         SOURCES modpackinstance.h
         SOURCES modpackmodel.h modpackmodel.cpp
         SOURCES backend.h backend.cpp
+        SOURCES modpackcheckupdateresponse.h
+        SOURCES modpackupdateresponse.h
+        SOURCES modpackresponsebase.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -51,9 +57,14 @@ set_target_properties(appsrc PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+target_include_directories(appsrc
+    PRIVATE ${LIBGIT2_INCLUDE_DIRS}
+)
+
 target_link_libraries(appsrc
     PRIVATE Qt6::Quick
             QuaZip::QuaZip
+            ${LIBGIT2_LIBRARIES}
 )
 
 install(TARGETS appsrc
