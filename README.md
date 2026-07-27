@@ -21,7 +21,7 @@ Modpack Update Manager depends on the following third-party projects:
 ### Indirect Dependancies\*
 
 - [Prism Launcher](https://prismlauncher.org/)
-- [vcpkg](https://github.com/microsoft/vcpkg/)
+- [vcpkg](https://vcpkg.io)
 
 <sup>\**No source code has been directly used/included in this application, but Modpack Update Manager still relies on these being installed.*</sup>
 
