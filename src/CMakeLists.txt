@@ -5,10 +5,8 @@ project(src VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
-find_package(QuaZip-Qt6 REQUIRED)
-find_package(PkgConfig REQUIRED)
-
-pkg_check_modules(LIBGIT2 REQUIRED libgit2)
+find_package(libgit2 CONFIG REQUIRED)
+add_subdirectory(external/quazip)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -57,14 +55,10 @@ set_target_properties(appsrc PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_include_directories(appsrc
-    PRIVATE ${LIBGIT2_INCLUDE_DIRS}
-)
-
 target_link_libraries(appsrc
     PRIVATE Qt6::Quick
+            libgit2::libgit2package
             QuaZip::QuaZip
-            ${LIBGIT2_LIBRARIES}
 )
 
 install(TARGETS appsrc

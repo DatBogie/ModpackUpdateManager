@@ -189,7 +189,7 @@ ModpackCheckUpdateResponse Backend::checkUpdate(ModpackInstance mi) {
         return {};
     }
     QJsonArray versions = refVersions.toArray();
-    for (int i=versions.size(); i>=0; i--) {
+    for (int i=versions.size()-1; i>=0; i--) {
         if (!versions[i].isObject()) continue;
         QJsonObject ver = versions[i].toObject();
         if (ver["Id"].isString() && ver["Id"].toString() == mi.currentVersionId) {
@@ -253,6 +253,7 @@ ModpackUpdateResponse Backend::updateInstance(ModpackInstance mi) {
     QVariantList *changelog = &mi.pendingUpdate.changelog;
     QDir updateDir(getRepoPath(mi)+"/versions/"+mi.pendingUpdate.updateId);
     QDir packDir(mi.instancePath+"/minecraft");
+    if (!packDir.exists()) packDir = QDir(mi.instancePath+"/.minecraft");
     bool success = false;
     for (int i=0; i<changelog->size(); i++) {
         QVariantMap change = changelog->at(i).toMap();
@@ -348,7 +349,7 @@ ModpackInstance Backend::addInstance(QString dir) {
         thumbParentPath = prismPath+"/icons/";
     else {
         thumbKey = "icon.png";
-        thumbParentPath = dir+"/minecraft/";
+        thumbParentPath = dir+(QDir(dir+"/minecraft").exists()? "/minecraft/" : "/.minecraft/");
     }
     QFile updateDef(dir+"/.modpackupdatemanager.json");
     bool isCompatible = false;

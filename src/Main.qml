@@ -590,6 +590,10 @@ ApplicationWindow {
                             anchors.fill: parent
                             fillMode: sourceSize.width == sourceSize.height? Image.PreserveAspectFit : Image.PreserveAspectCrop
                             source: "file:"+thumbnailParentPath+thumbnailKey
+                            onStatusChanged: {
+                                if (status !== Image.Error) return;
+                                source = "assets/hide_image_800dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.svg";
+                            }
                         }
                     }
 
@@ -698,7 +702,6 @@ ApplicationWindow {
                                 }
 
                                 function updateInstance(mi) {
-                                    console.log(mi);
                                     const updateResponse = backend.qmlUpdateInstance(mi);
                                     globalMessageDialog.title = `${name} — Modpack Update Fetcher`;
                                     globalMessageDialog.text = `## ${name} \n\n --- \n\n` + (updateResponse.success? `**Update successful!**  \n"${updateResponse.updateName}" (${updateResponse.updateId})  \n${updateResponse.updateDesc}` : "**Update failed!**  \nCheck the log for more info.");
