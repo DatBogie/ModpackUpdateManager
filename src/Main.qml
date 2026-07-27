@@ -45,6 +45,7 @@ ApplicationWindow {
     property int globalCtrlSize: 25
     property int globalPadding: 5
     property int globalBorderRadius: 10
+    property real globalBorderWidth: 1.0
     property real globalIconScale: .8
     property real globalModpackScale: .85
     property int globalHeaderSize: 18
@@ -112,8 +113,12 @@ ApplicationWindow {
                     color: window.text
                     text: `${globalSetupWizardWindow.mi.name} — ${globalSetupWizard.currentItem.pageTitle}`
                     elide: Text.ElideMiddle
-                    ToolTip.text: text
-                    ToolTip.visible: globalSetupWizardNavbarTitleMs.containsMouse
+
+                    GlobalToolTip {
+                        text: parent.text
+                        visible: globalSetupWizardNavbarTitleMs.containsMouse
+                    }
+
                     font.pointSize: globalSetupWizardNavbar.textSize
                     horizontalAlignment: Text.AlignHCenter
                     leftPadding: window.globalPadding
@@ -634,8 +639,12 @@ ApplicationWindow {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    ToolTip.text: "Setup Modpack Updates..."
-                                    ToolTip.visible: hovered
+
+                                    GlobalToolTip {
+                                        text: "Setup Modpack Updates..."
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     onClicked: {
@@ -660,8 +669,12 @@ ApplicationWindow {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    ToolTip.text: "View Details..."
-                                    ToolTip.visible: hovered
+
+                                    GlobalToolTip {
+                                        text: "View Details..."
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     onClicked: {
@@ -725,8 +738,11 @@ ApplicationWindow {
                                         radius: window.globalBorderRadius
                                     }
 
-                                    ToolTip.text: "Check for Updates"+(update.trulyEnabled? "" : " & Update")
-                                    ToolTip.visible: hovered
+                                    GlobalToolTip {
+                                        text: "Check for Updates"+(update.trulyEnabled? "" : " & Update")
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     onClicked: {
@@ -770,8 +786,12 @@ ApplicationWindow {
                                         color: !parent.down? labelContainer.color : labelContainer.childPressColor
                                         radius: window.globalBorderRadius
                                     }
-                                    ToolTip.text: "Update" + (pendingUpdate.hasUpdate? " (Pending)" : "")
-                                    ToolTip.visible: hovered
+
+                                    GlobalToolTip {
+                                        text: "Update" + (pendingUpdate.hasUpdate? " (Pending)" : "")
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     onClicked: {
@@ -799,8 +819,11 @@ ApplicationWindow {
                                     }
                                     onClicked: backend.setEnabledProperty(index, !packEnabled, name)
 
-                                    ToolTip.text: "Modpack Auto-Updates: "+(packEnabled? "Enabled" : "Disabled")
-                                    ToolTip.visible: hovered
+                                    GlobalToolTip {
+                                        text: "Modpack Auto-Updates: "+(packEnabled? "Enabled" : "Disabled")
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     contentItem: Image {
@@ -832,8 +855,11 @@ ApplicationWindow {
                                         backend.permRemoveInstance(index);
                                     }
 
-                                    ToolTip.text: "Remove from List"
-                                    ToolTip.visible: hovered
+                                    GlobalToolTip {
+                                        text: "Remove from List"
+                                        visible: parent.hovered
+                                    }
+
                                     implicitWidth: window.globalCtrlSize
 
                                     contentItem: Image {
@@ -918,8 +944,12 @@ ApplicationWindow {
                                     color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
                                     radius: window.globalBorderRadius
                                 }
-                                ToolTip.text: "Upload Instance (.zip)..."
-                                ToolTip.visible: hovered
+
+                                GlobalToolTip {
+                                    text: "Upload Instance (.zip)..."
+                                    visible: parent.hovered
+                                }
+
                                 implicitWidth: parent.parent.height
                                 implicitHeight: implicitWidth
 
@@ -947,8 +977,12 @@ ApplicationWindow {
                                     color: parent.enabled? (!parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor) : window.color
                                     radius: window.globalBorderRadius
                                 }
-                                ToolTip.text: "Re-fetch Instances from Prism Launcher"
-                                ToolTip.visible: hovered
+
+                                GlobalToolTip {
+                                    text: "Re-fetch Instances from Prism Launcher"
+                                    visible: parent.hovered
+                                }
+
                                 implicitWidth: parent.parent.height
                                 implicitHeight: implicitWidth
 
@@ -974,8 +1008,12 @@ ApplicationWindow {
                                     color: parent.enabled? (!parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor) : window.color
                                     radius: window.globalBorderRadius
                                 }
-                                ToolTip.text: "Clear Memory of Ignored Modpacks"
-                                ToolTip.visible: hovered
+
+                                GlobalToolTip {
+                                    text: "Clear Memory of Ignored Modpacks"
+                                    visible: parent.hovered
+                                }
+
                                 implicitWidth: parent.parent.height
                                 implicitHeight: implicitWidth
 
@@ -1019,8 +1057,12 @@ ApplicationWindow {
                                     color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
                                     radius: window.globalBorderRadius
                                 }
-                                ToolTip.text: "Manage Settings..."
-                                ToolTip.visible: hovered
+
+                                GlobalToolTip {
+                                    text: "Manage Settings..."
+                                    visible: parent.hovered
+                                }
+
                                 implicitWidth: parent.parent.height
                                 implicitHeight: implicitWidth
 
@@ -1038,8 +1080,12 @@ ApplicationWindow {
                                     color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
                                     radius: window.globalBorderRadius
                                 }
-                                ToolTip.text: "View Program License..."
-                                ToolTip.visible: hovered
+
+                                GlobalToolTip {
+                                    text: "View Program License..."
+                                    visible: parent.hovered
+                                }
+
                                 implicitWidth: parent.parent.height
                                 implicitHeight: implicitWidth
 

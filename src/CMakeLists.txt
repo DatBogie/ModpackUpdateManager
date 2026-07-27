@@ -42,6 +42,7 @@ qt_add_qml_module(appsrc
         SOURCES modpackcheckupdateresponse.h
         SOURCES modpackupdateresponse.h
         SOURCES modpackresponsebase.h
+        QML_FILES GlobalToolTip.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
