@@ -86,7 +86,9 @@ Modpack Update Manager depends on the following third-party projects:
     ./bootstrap-vcpkg.sh
     ```
 
-3. Clone Modpack Update Manager
+### Install Modpack Update Manager
+
+1. Clone Modpack Update Manager
 
     ```sh
     cd
@@ -94,7 +96,7 @@ Modpack Update Manager depends on the following third-party projects:
     cd ModpackManager/src
     ```
 
-4. Configure CMake
+2. Configure CMake
 
     **Windows**
 
@@ -108,7 +110,7 @@ Modpack Update Manager depends on the following third-party projects:
     cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/<QT_VERSION>/gcc_64"
     ```
 
-5. Build
+3. Build
 
     ```sh
     cmake --build build
