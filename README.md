@@ -101,13 +101,13 @@ Modpack Update Manager depends on the following third-party projects:
     **Windows**
 
     ```ps
-    cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_PREFIX_PATH=C:/Qt/<QT_VERSION>/msvc2022_64
+    cmake -B build -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=C:/Qt/<QT_VERSION>/msvc2022_64
     ```
 
     **Linux**
 
     ```sh
-    cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=$HOME/Qt/<QT_VERSION>/gcc_64"
+    cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_PREFIX_PATH="$HOME/Qt/<QT_VERSION>/gcc_64"
     ```
 
 3. Build
