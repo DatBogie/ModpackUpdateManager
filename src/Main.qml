@@ -255,10 +255,6 @@ ApplicationWindow {
                             onLinkActivated: link=>{ Qt.openUrlExternally(link) }
                             font.pointSize: window.globalTextSize
                             topPadding: window.globalPadding
-
-                            HoverHandler {
-                                cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
-                            }
                         }
                     }
                 }
@@ -616,15 +612,26 @@ ApplicationWindow {
 
                         RowLayout {
                             anchors.fill: parent
-                            Label {
+
+                            Text {
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.fillWidth: true
                                 horizontalAlignment: "AlignLeft"
                                 verticalAlignment: "AlignVCenter"
                                 text: name
                                 leftPadding: window.globalPadding
+                                rightPadding: window.globalPadding
                                 color: window.text
                                 elide: Text.ElideRight
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    GlobalToolTip {
+                                        text: parent.parent.text
+                                        visible: parent.containsMouse
+                                    }
+                                }
                             }
 
                             RowLayout {
@@ -1194,74 +1201,73 @@ ApplicationWindow {
                 height: parent.height-parent.modalPadding
                 anchors.centerIn: parent
 
-                RowLayout {
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    spacing: window.globalPadding
+
                     ColumnLayout {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        spacing: window.globalPadding
+                        spacing: window.globalPadding*2
 
-                        ColumnLayout {
-                            spacing: window.globalPadding*2
-
-                            AnimatedImage {
-                                id: thumbnail
-                                property int preferredWidth: 300
-                                Layout.alignment: Qt.AlignTop
-                                Layout.preferredWidth: preferredWidth
-                                Layout.preferredHeight: 150
-                                fillMode: Image.PreserveAspectFit
-                                source: modpackDetails.thumbnailSource
+                        AnimatedImage {
+                            id: thumbnail
+                            property int preferredWidth: 300
+                            Layout.alignment: Qt.AlignTop
+                            Layout.preferredWidth: preferredWidth
+                            Layout.preferredHeight: 150
+                            fillMode: Image.PreserveAspectFit
+                            property string thumbSource: modpackDetails.thumbnailSource
+                            source: modpackDetails.thumbnailSource
+                            onThumbSourceChanged: source = thumbSource
+                            onStatusChanged: {
+                                if (status !== Image.Error) return;
+                                source = "assets/hide_image_800dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.svg";
                             }
-
-                            Text {
-                                Layout.alignment: Qt.AlignTop
-                                Layout.preferredWidth: thumbnail.preferredWidth
-                                elide: Text.ElideRight
-                                text: modpackDetails.instanceName
-                                font.pointSize: window.globalHeaderSize
-                                color: window.text
-                                horizontalAlignment: Text.AlignHCenter
-                            }
-                        }
-
-                        Rectangle {
-                            color: window.text
-                            height: 1
-                            Layout.preferredWidth: thumbnail.preferredWidth
                         }
 
                         Text {
-                            property bool linkHover: false
-                            visible: modpackDetails.isCompatible
+                            Layout.alignment: Qt.AlignTop
                             Layout.preferredWidth: thumbnail.preferredWidth
-                            wrapMode: Text.Wrap
-                            text: `Version: ${window.capitalizeFirst(modpackDetails.currentVersionType)} ${modpackDetails.currentVersionId}  \nUpdate Host Url: [_GitHub_](${modpackDetails.updateUrl})`
-                            textFormat: Text.MarkdownText
-                            font.pointSize: window.globalTextSize
+                            elide: Text.ElideRight
+                            text: modpackDetails.instanceName
+                            font.pointSize: window.globalHeaderSize
                             color: window.text
-                            horizontalAlignment: Text.AlignLeft
-                            onLinkHovered: link=>{ linkHover = link !== "" }
-                            onLinkActivated: link=>{ Qt.openUrlExternally(link) }
-
-                            HoverHandler {
-                                cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.ArrowCursor
+                            horizontalAlignment: Text.AlignHCenter
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                GlobalToolTip {
+                                    text: parent.parent.text
+                                    visible: parent.containsMouse
+                                }
                             }
-
                         }
                     }
 
-                    // ColumnLayout {
-                    //     Layout.fillWidth: true
-                    //     Layout.fillHeight: true
-                    //     Text {
-                    //         Layout.alignment: Qt.AlignTop
-                    //         Layout.fillWidth: true
-                    //         elide: Text.ElideRight
-                    //         text: modpackDetails.instanceName
-                    //         font.pointSize: window.globalHeaderSize
-                    //         color: window.text
-                    //     }
-                    // }
+                    Rectangle {
+                        color: window.text
+                        height: 1
+                        Layout.preferredWidth: thumbnail.preferredWidth
+                    }
+
+                    Text {
+                        property bool linkHover: false
+                        visible: modpackDetails.isCompatible
+                        Layout.preferredWidth: thumbnail.preferredWidth
+                        wrapMode: Text.Wrap
+                        text: `Version: ${window.capitalizeFirst(modpackDetails.currentVersionType)} ${modpackDetails.currentVersionId}  \nUpdate Host Url: [_GitHub_](${modpackDetails.updateUrl})`
+                        textFormat: Text.MarkdownText
+                        font.pointSize: window.globalTextSize
+                        color: window.text
+                        horizontalAlignment: Text.AlignLeft
+                        onLinkHovered: link=>{ linkHover = link !== "" }
+                        onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+
+                        HoverHandler {
+                            cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.ArrowCursor
+                        }
+
+                    }
                 }
             }
 

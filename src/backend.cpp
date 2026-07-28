@@ -383,7 +383,7 @@ void Backend::loadPrismInstances() {
     QDirIterator iter(prismPath+"/instances");
     while (iter.hasNext()) {
         QString dir = iter.next();
-        if (dir.endsWith(".") || dir.endsWith("..") || !QDir(dir).exists()) continue;
+        if (dir.endsWith(".") || dir.endsWith("..") || !QDir(dir).exists() || (!QDir(dir+"/minecraft").exists() && !QDir(dir+"/.minecraft").exists()) || !QFile(dir+"/instance.cfg").exists()) continue;
         addInstance(dir);
     }
 }
