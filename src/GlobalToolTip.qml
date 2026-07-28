@@ -3,6 +3,8 @@ import QtQuick.Controls.Basic
 import QtQuick.Effects
 
 ToolTip {
+    palette.text: window.text
+
     background: Item {
         implicitWidth: tipBubble.implicitWidth
         implicitHeight: tipBubble.implicitHeight
