@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(libgit2 CONFIG REQUIRED)
+
+set(QUAZIP_QT_MAJOR_VERSION 6)
 add_subdirectory(external/quazip)
 
 qt_standard_project_setup(REQUIRES 6.10)
