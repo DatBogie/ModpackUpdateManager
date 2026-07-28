@@ -4,6 +4,8 @@ project(src VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(GNUInstallDirs)
+
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(libgit2 CONFIG REQUIRED)
 
