@@ -19,6 +19,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 - [QuaZip](https://github.com/stachenov/quazip/) ([GPL v2.1 LICENSE](https://raw.githubusercontent.com/stachenov/quazip/refs/heads/master/COPYING/))
 - [libgit2](https://github.com/libgit2/libgit2) ([GPL v2 LICENSE](https://raw.githubusercontent.com/libgit2/libgit2/refs/heads/main/COPYING/))
+- [Qt 6](https://www.qt.io/development/qt-framework/qt6) ([LGPL v3 LICENSE](https://doc.qt.io/qt-6/lgpl.html))
 
 ### Indirect Dependancies\*
 
