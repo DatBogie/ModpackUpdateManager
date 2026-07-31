@@ -62,6 +62,12 @@ Modpack Update Manager depends on the following third-party projects:
 
 <sup>\**An account is required, though this is the best way to install a specific version of Qt on any platform.*</sup>
 
+> [!Important]
+> Some steps will ask for certain values to be manually entered by you. These are indicated by a word surrounded by `<>`s, like `<username>`.
+> - `<username>`: Your computer user's username.  
+> - `<version>`: The version of Qt you installed via Qt Maintenance Tool. Eg. `6.11.1`.  
+> - `<year>`: (**Windows Only**) The year of the Visual Studio compiler you're using. Eg. `2022`.
+
 ### Install vcpkg
 
 1. Clone the [vcpkg repository](https://github.com/microsoft/vcpkg).
@@ -76,7 +82,7 @@ Modpack Update Manager depends on the following third-party projects:
 
     **Windows**
 
-    ```ps
+    ```powershell
     .\bootstrap-vcpkg.bat
     ```
 
@@ -90,28 +96,69 @@ Modpack Update Manager depends on the following third-party projects:
 
 1. Clone Modpack Update Manager
 
+    **Windows**
+
+    ```powershell
+    cd
+    git clone --recursive https://github.com/DatBogie/ModpackUpdateManager.git
+    cd ModpackManager\src
+    ```
+
+    **Linux**
+   
     ```sh
     cd
     git clone --recursive https://github.com/DatBogie/ModpackUpdateManager.git
     cd ModpackManager/src
     ```
 
-2. Configure CMake
+3. Open in Qt Creator (`File > Open File or Project...`, select `ModpackUpdateManager/src/CMakeLists.txt` from your user directory)
+
+4. ***If on Windows***, check only `Desktop Qt <version> MSVC<year> 64bit` and its corresponding check `Release`. ***Otherwise***, just pick one of them and check only `Release` for it.
+
+5.  Hover over `Desktop Qt <version> MSVC<year> 64bit` (or whichever one you picked) and click `Manage...`.
+
+6.  Scroll down and click the `Change...` button next to `CMake Configuration:`
+
+7.  Append one of the following and click `Apply` and `OK`, then click `Apply` and `OK` again:
 
     **Windows**
 
-    ```ps
-    cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_PREFIX_PATH="C:/Qt/<QT_VERSION>/msvc2022_64"
+    ```
+    -DCMAKE_TOOLCHAIN_FILE=C:/Users/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
     ```
 
     **Linux**
 
-    ```sh
-    cmake -B build -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_PREFIX_PATH="$HOME/Qt/<QT_VERSION>/gcc_64"
+    ```
+    -DCMAKE_TOOLCHAIN_FILE=/home/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
     ```
 
-3. Build
+8. Click `Configure Project`, then wait for it to finish `Configuring src` and `Indexing src...`
 
-    ```sh
-    cmake --build build
+9. Press `CTRL+B` or click the hammer icon in the bottom left
+
+10. Open your file manager and navigate to `$HOME/ModpackUpdateManager/src/build` and open the folder inside
+
+11. ***If you're on linux, you're done! The binary is called `appsrc`. You may stop following these instructions!***
+
+12. Make a new folder called `dist`, and copy `appsrc.exe`, `git2.dll`, `pcre.dll`, and `z.dll` into it.
+
+13. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
+
+14. In a PowerShell terminal, type the following, then press `TAB`:
+
+    ```powershell
+    cd $HOME\ModpackUpdateManager\src\build\
     ```
+    
+15. Then, type `dist` and press `Enter`
+
+16. Enter the following and press `Enter`:
+
+    ```powershell
+    C:\Qt\<version>\msvc<year>_64\bin\windeployqt.exe --qmldir C:/Qt/<version>/msvc<year>_64/bin/qml .\appsrc.exe
+    cp C:\Qt\<version>\msvc<year>_64\bin\Qt6Core5Compat.dll .\
+    ```
+
+17. That's it! Unlike on Linux, though, you have to move the entire `dist` folder, not just the executable. Feel free to rename both, though! Just don't touch the `.dll`s.
