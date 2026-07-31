@@ -6,4 +6,5 @@
 
 struct ModpackCheckUpdateResponse : ModpackResponseBase {
     bool hasUpdate = false;
+    QVariantList updateProgression;
 };

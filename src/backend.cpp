@@ -14,6 +14,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QCryptographicHash>
+#include <QDesktopServices>
 
 #include "modpackresponsebase.h"
 #include "modpackcheckupdateresponse.h"
@@ -189,15 +190,28 @@ ModpackCheckUpdateResponse Backend::checkUpdate(ModpackInstance mi) {
         return {};
     }
     QJsonArray versions = refVersions.toArray();
+    QVariantList progressIds;
+    QJsonObject newestVer;
     for (int i=versions.size()-1; i>=0; i--) {
         if (!versions[i].isObject()) continue;
         QJsonObject ver = versions[i].toObject();
         if (ver["Id"].isString() && ver["Id"].toString() == mi.currentVersionId) {
-            qDebug() << mi.name << "is already up-to-date (no newer versions found)!";
-            return {};
+            if (newestVer.isEmpty()) {
+                qDebug() << mi.name << "is already up-to-date (no newer versions found)!";
+                return {};
+            }
+            break;
         }
-        if (ver["Type"] != mi.currentVersionType || !ver["Id"].isString()) continue;
-        return { ver["Id"].toString(), ver["Type"].toString(), ver["Name"].toString(), ver["Description"].toString(), ver["Changelog"].toArray().toVariantList(), true };
+        if (!ver["Type"].isString() || ver["Type"].toString() != mi.currentVersionType || !ver["Id"].isString()) continue;
+        if (newestVer.isEmpty()) {
+            newestVer = ver;
+            continue;
+        }
+        QVariantMap data = { { "versionId", ver["Id"].toString() }, { "changelog", ver["Changelog"].toArray().toVariantList() } };
+        progressIds.insert(0, data);
+    }
+    if (!newestVer.isEmpty()) {
+        return { newestVer["Id"].toString(), newestVer["Type"].toString(), newestVer["Name"].toString(), newestVer["Description"].toString(), newestVer["Changelog"].toArray().toVariantList(), true, progressIds };
     }
     qDebug() << mi.name << "is already up-to-date (no other versions found)!";
     return {};
@@ -213,6 +227,7 @@ QVariantMap Backend::qmlCheckUpdate(QVariantList mi) {
     ret["updateDesc"] = response.updateDesc;
     ret["changelog"] = response.changelog;
     ret["hasUpdate"] = response.hasUpdate;
+    ret["updateProgression"] = response.updateProgression;
     return ret;
 }
 
@@ -250,14 +265,28 @@ bool Backend::areFilesDuplicates(QFile &a, QFile &b) {
 
 ModpackUpdateResponse Backend::updateInstance(ModpackInstance mi) {
     if (!mi.pendingUpdate.hasUpdate) return {};
-    QVariantList *changelog = &mi.pendingUpdate.changelog;
+    QVariantList changelog = mi.pendingUpdate.changelog;
     QDir updateDir(getRepoPath(mi)+"/versions/"+mi.pendingUpdate.updateId);
     QDir packDir(mi.instancePath+"/minecraft");
     if (!packDir.exists()) packDir = QDir(mi.instancePath+"/.minecraft");
     bool success = false;
-    for (int i=0; i<changelog->size(); i++) {
-        QVariantMap change = changelog->at(i).toMap();
-        QFile newMod(updateDir.absolutePath()+"/"+change["Path"].toString());
+    for (QVariant &value : mi.pendingUpdate.updateProgression) {
+        QVariantMap progData = value.toMap();
+        QVariantList progChangelog = progData["changelog"].toList();
+        for (int i=progChangelog.size()-1; i>=0; i--) {
+            QVariantMap step = progChangelog[i].toMap();
+            if (step["ChangeType"].toString() != "-")
+                step["absPath"] = getRepoPath(mi)+"/versions/"+progData["versionId"].toString()+"/"+step["Path"].toString();
+            changelog.insert(0, QVariant(step));
+        }
+    }
+    qDebug() << changelogToString(changelog);
+    bool failFlag = false;
+    for (int i=0; i<changelog.size(); i++) {
+        QVariantMap change = changelog[i].toMap();
+        QFile newMod(change["absPath"].isValid()? change["absPath"].toString() : updateDir.absolutePath()+"/"+change["Path"].toString());
+        if (change["absPath"].isValid())
+            qDebug() << newMod.fileName();
         QFile oldMod(packDir.absolutePath()+"/"+change["Path"].toString());
         QFileInfo newModInfo(newMod);
         QFileInfo oldModInfo(oldMod);
@@ -265,6 +294,7 @@ ModpackUpdateResponse Backend::updateInstance(ModpackInstance mi) {
             // Adding
             if (!newMod.exists()) {
                 qWarning() << "Mod" << newModInfo.fileName() << "doesn't exist in" << newModInfo.absoluteDir().absolutePath() << "!";
+                failFlag = true;
                 break;
             }
             if (oldMod.exists()) {
@@ -275,11 +305,16 @@ ModpackUpdateResponse Backend::updateInstance(ModpackInstance mi) {
                 }
                 if (!oldMod.remove()) {
                     qWarning() << "Failed to remove mod" << newModInfo.fileName() << "! Error:" << oldMod.errorString();
+                    failFlag = true;
                     break;
                 }
             }
+            if (!oldModInfo.dir().exists()) {
+                oldModInfo.dir().mkpath(".");
+            }
             if (!newMod.copy(oldMod.fileName())) {
                 qWarning() << "Failed to copy mod" << newModInfo.fileName() << "! Error:" << newMod.errorString();
+                failFlag = true;
                 break;
             }
             qDebug() << "Successfully copied mod" << newModInfo.fileName() << "!";
@@ -288,13 +323,16 @@ ModpackUpdateResponse Backend::updateInstance(ModpackInstance mi) {
         // Removing
         if (oldMod.exists()) {
             qDebug() << "Removing mod" << newModInfo.fileName() << "...";
-            if (!oldMod.remove())
+            if (!oldMod.remove()) {
                 qWarning() << "Failed to remove mod" << newModInfo.fileName() << "! Error:" << oldMod.errorString();
-            break;
+                failFlag = true;
+                break;
+            }
+            continue;
         }
         qDebug() << "Nothing to remove; mod" << newModInfo.fileName() << "doesn't exist in" << oldModInfo.absoluteDir().absolutePath() << "!";
     }
-    ModpackUpdateResponse updateResponse = ModpackCheckUpdateResponseToModpackUpdateResponse(mi.pendingUpdate, true);
+    ModpackUpdateResponse updateResponse = ModpackCheckUpdateResponseToModpackUpdateResponse(mi.pendingUpdate, !failFlag);
     if (updateResponse.success) {
         QFile updateDef(mi.instancePath+"/.modpackupdatemanager.json");
         QJsonObject data = readJson(&updateDef);
@@ -465,4 +503,134 @@ void Backend::setCurrentVersionIdProperty(int index, QString versionId) {
 
 void Backend::setCurrentVersionTypeProperty(int index, QString versionType) {
     model.setRoleProperty(index, model.CurrentVersionTypeRole, QVariant(versionType));
+}
+
+ModpackInstance Backend::QVariantMapToModpackInstance(QVariantMap mi) {
+    ModpackInstance inst = { mi["name"].toString(), mi["thumbnailKey"].toString(), mi["thumbnailParentPath"].toString(), mi["packEnabled"].toBool(), mi["fromPrism"].toBool(), mi["isCompatible"].toBool(), mi["updateUrl"].toString(), mi["currentVersionId"].toString(), mi["currentVersionType"].toString(), mi["instancePath"].toString() };
+    return inst;
+}
+
+QVariantMap Backend::handleRecordIterFile(QDir instDir, QFileInfo fileInfo) {
+    QFile file(fileInfo.absoluteFilePath());
+    if (!fileInfo.exists()) return {};
+    QString relPath = instDir.relativeFilePath(fileInfo.absoluteFilePath());
+    QCryptographicHash fileHash(QCryptographicHash::Sha256);
+    if (!file.open(QIODevice::ReadOnly)) return {};
+    if (!fileHash.addData(&file)) { file.close(); return {}; }
+    QString hash = fileHash.result();
+    file.close();
+    QVariantMap map({ { "absPath", fileInfo.absoluteFilePath() }, { "path", relPath }, { "hash", hash }, { "name", fileInfo.fileName() } });
+    return map;
+}
+
+QVariantMap Backend::recordModpackSnapshot(QVariantMap mi) {
+    ModpackInstance inst = QVariantMapToModpackInstance(mi);
+    QDir instDir(QDir(inst.instancePath+"/minecraft").exists()? inst.instancePath+"/minecraft" : inst.instancePath+"/.minecraft");
+    if (!instDir.exists()) return {};
+    QVariantMap snapshot;
+    QDir modsDir(instDir.absolutePath()+"/mods");
+    if (modsDir.exists()) {
+        QDirIterator iterMods(modsDir);
+        while (iterMods.hasNext()) {
+            QFileInfo fileInfo = iterMods.nextFileInfo();
+            QVariantMap map = handleRecordIterFile(instDir, fileInfo);
+            if (map.isEmpty()) continue;
+            snapshot[fileInfo.fileName()] = map;
+        }
+    }
+    QDir configDir(instDir.absolutePath()+"/config");
+    if (configDir.exists()) {
+        QDirIterator iterConfig(configDir);
+        while (iterConfig.hasNext()) {
+            QFileInfo fileInfo = iterConfig.nextFileInfo();
+            QVariantMap map = handleRecordIterFile(instDir, fileInfo);
+            if (map.isEmpty()) continue;
+            snapshot[fileInfo.fileName()] = map;
+        }
+    }
+    return snapshot;
+}
+
+QString Backend::changelogToString(QVariantList changelog) {
+    QString ret;
+    for (QVariant &value : changelog) {
+        QVariantMap step = value.toMap();
+        ret += "  \n- ["+step["ChangeType"].toString()+"] "+step["Path"].toString();
+    }
+    return ret;
+}
+
+QVariantList Backend::genChangelog(QVariantMap mi, QVariantMap initialSnapshot) {
+    QStringList combinedKeys = initialSnapshot.keys();
+    QVariantList changelog;
+    QVariantMap currentSnapshot = recordModpackSnapshot(mi);
+    QStringList currentKeys = currentSnapshot.keys();
+    for (QString &key : currentKeys) {
+        if (!combinedKeys.contains(key)) combinedKeys.append(key);
+    }
+    for (QString &fileName : combinedKeys) {
+        QVariantMap oldFileData = initialSnapshot[fileName].toMap();
+        QVariantMap newFileData = currentSnapshot[fileName].toMap();
+        if (oldFileData.isEmpty() && newFileData.isEmpty()) continue; // Should be impossible
+        // Removed
+        if (newFileData.isEmpty()) {
+            QVariantMap data = { { "ChangeType", "-" }, { "Path", oldFileData["path"] } };
+            changelog.append(data);
+            continue;
+        }
+        // Added/Changed
+        if (oldFileData.isEmpty() || (oldFileData["hash"].toString() != newFileData["hash"].toString())) {
+            QVariantMap data = { { "ChangeType", "+" }, { "Path", newFileData["path"] } };
+            changelog.append(data);
+            continue;
+        }
+        // Unchanged
+        continue;
+    }
+    return changelog;
+}
+
+bool Backend::createNewVersion(QVariantMap mi, QVariantMap initialSnapshot, QString versionId, QString versionType, QString versionName, QString versionDesc) {
+    ModpackInstance inst = QVariantMapToModpackInstance(mi);
+    QString repoPath = getRepoPath(inst);
+    QString manifestPath = repoPath+"/modpackupdatemanager.json";
+    QFile manifest(manifestPath);
+    if (!manifest.exists()) return false;
+    QVariantList changelog = genChangelog(mi, initialSnapshot);
+    QVariantMap manifestJson = readJson(&manifest).toVariantMap();
+    if (manifestJson.isEmpty()) return false;
+    QVariantList versions = manifestJson["Versions"].toList();
+    QVariantMap versionData = { { "Id", versionId }, { "Type", versionType }, { "Name", versionName }, { "Description", versionDesc }, { "Changelog", changelog } };
+    versions.append(versionData);
+    manifestJson["Versions"] = versions;
+    if (!writeJson(&manifest, QJsonObject::fromVariantMap(manifestJson))) return false;
+    QDir verFolder(repoPath+"/versions/"+versionId);
+    if (!verFolder.exists()) verFolder.mkpath(".");
+    QString mcFolder = inst.instancePath + (QDir(inst.instancePath+"/minecraft").exists()? "/minecraft" : "/.minecraft");
+    for (QVariant &value : changelog) {
+        QVariantMap step = value.toMap();
+        if (step["Type"].toString() == "-") continue;
+        QFile file(mcFolder+"/"+step["Path"].toString());
+        if (!file.exists()) {
+            qWarning() << "File" << file.fileName() << "not found!";
+            continue;
+        }
+        QString outPath = verFolder.absoluteFilePath(step["Path"].toString());
+        QDir outPathParent = QFileInfo(outPath).dir();
+        if (!outPathParent.exists()) outPathParent.mkpath(".");
+        if (!file.copy(outPath)) {
+            qWarning() << "Failed to copy" << file.fileName() << "to" << outPath << "!";
+            continue;
+        }
+        qDebug() << "Copied" << file.fileName() << "to" << outPath << "!";
+    }
+    return true;
+}
+
+QString Backend::getGitCachePath() {
+    return getRepoPath({});
+}
+
+void Backend::openGitCache() {
+    QDesktopServices::openUrl(QUrl::fromLocalFile(getGitCachePath()));
 }

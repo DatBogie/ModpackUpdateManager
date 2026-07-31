@@ -80,7 +80,6 @@ ApplicationWindow {
                 return;
             }
             globalSetupWizardUrl.text = "";
-            globalSetupWizardVersionId.text = "";
         }
 
         property color childColor: window.surface0
@@ -203,46 +202,6 @@ ApplicationWindow {
                     }
 
                     Item {
-                        property string pageTitle: "Creating New Versions"
-                        Column {
-                            width: parent.width
-                            height: parent.height-window.globalPadding*2
-                            anchors {
-                                centerIn: parent
-                            }
-                            spacing: window.globalPadding
-
-                            TextField {
-                                property string outputText: text === ""? "1.0.1" : text
-                                id: globalSetupWizardVersionId
-                                placeholderText: "Enter new Version Id (eg. 1.0.1)..."
-                                width: parent.width
-                                background: Rectangle {
-                                    color: globalSetupWizardWindow.childColor
-                                    radius: window.globalBorderRadius
-                                }
-                            }
-
-                            TextEdit {
-                                property bool linkHover: false
-                                width: parent.width
-                                textFormat: Text.MarkdownText
-                                text: `1. Go to the root of your repo.\n2. Create a new file called \`versions/${globalSetupWizardVersionId.outputText}/mods/.DS_Store\` and commit.\n3. Click \`Upload files\` under \`Add file\` and upload any mods you're adding to or updating in this new version!`
-                                wrapMode: Text.Wrap
-                                color: window.text
-                                onLinkHovered: link=>{ linkHover = link !== "" }
-                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
-                                font.pointSize: window.globalTextSize
-                                readOnly: true
-
-                                HoverHandler {
-                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
-                                }
-                            }
-                        }
-                    }
-
-                    Item {
                         property string pageTitle: "Done!"
                         Text {
                             property bool linkHover: false
@@ -318,7 +277,7 @@ ApplicationWindow {
 
                     Button {
                         id: globalSetupWizardNextBtn
-                        visible: (globalSetupWizard.currentIndex !== 0 || globalSetupWizardUrl.text.startsWith("https://github.com/")) && (globalSetupWizard.currentIndex < globalSetupWizard.count-1)
+                        visible: globalSetupWizardUrl.text.startsWith("https://github.com/") && (globalSetupWizard.currentIndex < globalSetupWizard.count-1)
                         enabled: visible
                         padding: 0
                         property string btnText: "Next"
@@ -400,6 +359,590 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    Window {
+        id: globalVersionWizardWindow
+        visible: false
+        property var mi: ({ index: 0, name: "", thumbnailKey: "", thumbnailParentPath: "", packEnabled: false, fromPrism: true, isCompatible: false, updateUrl: "", currentVersionId: "", currentVersionType: "", instancePath: "" });
+        title: `${mi.name} — Modpack Version Wizard`
+        width: 600
+        height: 400
+        minimumWidth: width
+        minimumHeight: height
+        maximumWidth: width
+        maximumHeight: height
+        color: window.color
+
+        onVisibleChanged: {
+            if (!visible) {
+                globalVersionWizard.currentIndex = 0;
+                return;
+            }
+            globalVersionWizardVersionId.clear();
+            globalVersionWizardVersionName.clear();
+            globalVersionWizardVersionType.clear();
+            globalVersionWizardVersionDescription.clear();
+            initialSnapshot = [];
+        }
+
+        property color childColor: window.surface0
+        property color childPressColor: window.surface1
+        property var initialSnapshot: ({});
+
+        Item {
+            width: parent.width-window.globalPadding*2
+            height: parent.height-window.globalPadding*2
+            anchors.centerIn: parent
+
+            Rectangle {
+                id: globalVersionWizardNavbar
+                property real textSize: window.globalTextSize
+                color: window.base
+                height: textSize*2;
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+                radius: window.globalBorderRadius
+
+                Text {
+                    anchors {
+                        left: parent.left
+                        right: globalVersionWizardNavbarTicker.left
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    color: window.text
+                    text: `${globalVersionWizardWindow.mi.name} — ${globalVersionWizard.currentItem.pageTitle}`
+                    elide: Text.ElideMiddle
+
+                    GlobalToolTip {
+                        text: parent.text
+                        visible: globalVersionWizardNavbarTitleMs.containsMouse
+                    }
+
+                    font.pointSize: globalVersionWizardNavbar.textSize
+                    horizontalAlignment: Text.AlignHCenter
+                    leftPadding: window.globalPadding
+                    rightPadding: window.globalPadding
+                    MouseArea {
+                        id: globalVersionWizardNavbarTitleMs
+                        anchors.fill: parent
+                        hoverEnabled: true
+                    }
+                }
+
+                Text {
+                    id: globalVersionWizardNavbarTicker
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                    }
+                    color: window.text
+                    text: `(${globalVersionWizard.currentIndex+1}/${globalVersionWizard.count})`
+                    font.pointSize: globalVersionWizardNavbar.textSize
+                    horizontalAlignment: Text.AlignRight
+                    leftPadding: window.globalPadding
+                    rightPadding: window.globalPadding
+                }
+            }
+
+            Rectangle {
+                color: window.crust
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: globalVersionWizardNavbar.bottom
+                    bottom: globalVersionWizardControls.parent.top
+                }
+
+                SwipeView {
+                    id: globalVersionWizard
+                    interactive: false
+                    anchors.fill: parent
+                    clip: true
+
+                    Item {
+                        property string pageTitle: "Record Snapshot"
+                        Column {
+                            width: parent.width
+                            height: parent.height-window.globalPadding*2
+                            anchors {
+                                centerIn: parent
+                            }
+                            spacing: window.globalPadding
+
+                            TextEdit {
+                                property bool linkHover: false
+                                width: parent.width
+                                textFormat: Text.MarkdownText
+                                text: "Click the button below to record an initial snapshot of your instance's mods and mod config files.  \nAfter this snapshot is taken, make the changes you'd like to be in the next version."
+                                wrapMode: Text.Wrap
+                                color: window.text
+                                onLinkHovered: link=>{ linkHover = link !== "" }
+                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                font.pointSize: window.globalTextSize
+                                topPadding: window.globalPadding
+                                readOnly: true
+
+                                HoverHandler {
+                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                }
+                            }
+
+                            Button {
+                                id: globalVersionWizardSnapshot
+                                padding: 0
+                                property string btnText: "Create Snapshot"
+                                Layout.fillHeight: true
+                                background: Rectangle {
+                                    color: !parent.down? globalVersionWizardWindow.childColor : globalVersionWizardWindow.childPressColor
+                                    radius: window.globalBorderRadius
+                                }
+                                onClicked: globalVersionWizardWindow.initialSnapshot = backend.recordModpackSnapshot(globalVersionWizardWindow.mi)
+
+                                contentItem: RowLayout {
+                                    height: parent.height
+                                    spacing: 0
+
+                                    Image {
+                                        Layout.fillHeight: true
+                                        Layout.preferredWidth: height
+                                        scale: window.globalIconScale
+                                        source: "assets/archive_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    Text {
+                                        text: parent.parent.btnText
+                                        horizontalAlignment: Text.AlignLeft
+                                        color: window.text
+                                        rightPadding: window.globalPadding
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Item {
+                        property string pageTitle: "Preview Changelog"
+                        ColumnLayout {
+                            width: parent.width
+                            height: parent.height-window.globalPadding*2
+                            anchors {
+                                centerIn: parent
+                            }
+                            spacing: window.globalPadding
+
+                            TextEdit {
+                                property bool linkHover: false
+                                Layout.fillWidth: true
+                                textFormat: Text.MarkdownText
+                                text: "Click the button below to generate a changelog based on current changes."
+                                wrapMode: Text.Wrap
+                                color: window.text
+                                onLinkHovered: link=>{ linkHover = link !== "" }
+                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                font.pointSize: window.globalTextSize
+                                topPadding: window.globalPadding
+                                readOnly: true
+
+                                HoverHandler {
+                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                }
+                            }
+
+                            ScrollView {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                TextArea {
+                                    id: globalVersionWizardChangelog
+                                    property bool linkHover: false
+                                    width: parent.width
+                                    textFormat: Text.MarkdownText
+                                    placeholderText: "Generated changelog will display here..."
+                                    wrapMode: Text.Wrap
+                                    color: window.text
+                                    onLinkHovered: link=>{ linkHover = link !== "" }
+                                    onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                    font.pointSize: window.globalTextSize
+                                    topPadding: window.globalPadding
+                                    readOnly: true
+                                    background: Rectangle {
+                                        color: globalVersionWizardWindow.childColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                    HoverHandler {
+                                        cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                    }
+                                }
+                            }
+
+                            Button {
+                                id: globalVersionWizardChangelogBtn
+                                padding: 0
+                                property string btnText: "Generate Changelog"
+                                background: Rectangle {
+                                    color: !parent.down? globalVersionWizardWindow.childColor : globalVersionWizardWindow.childPressColor
+                                    radius: window.globalBorderRadius
+                                }
+                                onClicked: globalVersionWizardChangelog.text = backend.changelogToString(backend.genChangelog(globalVersionWizardWindow.mi, globalVersionWizardWindow.initialSnapshot))
+
+                                contentItem: RowLayout {
+                                    height: parent.height
+                                    spacing: 0
+
+                                    Image {
+                                        Layout.fillHeight: true
+                                        Layout.preferredWidth: height
+                                        scale: window.globalIconScale
+                                        source: "assets/list_alt_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    Text {
+                                        text: parent.parent.btnText
+                                        horizontalAlignment: Text.AlignLeft
+                                        color: window.text
+                                        rightPadding: window.globalPadding
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Item {
+                        property string pageTitle: "Version Information"
+                        ColumnLayout {
+                            width: parent.width
+                            height: parent.height-window.globalPadding*2
+                            anchors {
+                                centerIn: parent
+                            }
+                            spacing: window.globalPadding
+
+                            TextEdit {
+                                property bool linkHover: false
+                                Layout.fillWidth: true
+                                textFormat: Text.MarkdownText
+                                text: "Enter the update information for this new version below."
+                                font.family: "SF Pro Text"
+                                wrapMode: Text.Wrap
+                                color: window.text
+                                onLinkHovered: link=>{ linkHover = link !== "" }
+                                onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                                font.pointSize: window.globalTextSize
+                                readOnly: true
+
+                                HoverHandler {
+                                    cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.IBeamCursor
+                                }
+                            }
+
+                            TextField {
+                                property string outputText: text === ""? "1.0.1" : text
+                                id: globalVersionWizardVersionId
+                                placeholderText: "Enter new version's id (eg. 1.0.1)..."
+                                Layout.fillWidth: true
+                                background: Rectangle {
+                                    color: globalVersionWizardWindow.childColor
+                                    radius: window.globalBorderRadius
+                                }
+                            }
+
+                            TextField {
+                                property string outputText: text === ""? "release" : text
+                                id: globalVersionWizardVersionType
+                                placeholderText: "Enter new version's type (eg. release)..."
+                                Layout.fillWidth: true
+                                background: Rectangle {
+                                    color: globalVersionWizardWindow.childColor
+                                    radius: window.globalBorderRadius
+                                }
+                            }
+
+                            TextField {
+                                property string outputText: text === ""? "Untitled Version" : text
+                                id: globalVersionWizardVersionName
+                                placeholderText: "Enter new version's name (eg. Untitled Version)..."
+                                Layout.fillWidth: true
+                                background: Rectangle {
+                                    color: globalVersionWizardWindow.childColor
+                                    radius: window.globalBorderRadius
+                                }
+                            }
+
+                            ScrollView {
+                                clip: true
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                TextArea {
+                                    property string outputText: text
+                                    id: globalVersionWizardVersionDescription
+                                    placeholderText: "Enter new version's description (Markdown supported!)..."
+                                    width: parent.width
+                                    background: Rectangle {
+                                        color: globalVersionWizardWindow.childColor
+                                        radius: window.globalBorderRadius
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Item {
+                        property string pageTitle: "Write Version to Local Repository"
+                        Text {
+                            property bool linkHover: false
+                            width: parent.width
+                            textFormat: Text.MarkdownText
+                            text: "- Click `Finish` below to write this new version to the locally-stored repository located in the `git.cache` folder.\nGet there by using the `Open GitHub Cache Directory...` button on the top-right of the home screen!"
+                            wrapMode: Text.Wrap
+                            color: window.text
+                            onLinkHovered: link=>{ linkHover = link !== "" }
+                            onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                            font.pointSize: window.globalTextSize
+                            topPadding: window.globalPadding
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                color: window.base
+                height: window.globalCtrlSize+window.globalPadding*2
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+                radius: window.globalBorderRadius
+
+                RowLayout {
+                    id: globalVersionWizardControls
+                    spacing: window.globalPadding
+                    height: window.globalCtrlSize
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        centerIn: parent
+                    }
+
+                    Button {
+                        id: globalVersionWizardBackBtn
+                        visible: globalVersionWizard.currentIndex > 0
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Back"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalVersionWizardWindow.childColor : globalVersionWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: {
+                            globalVersionWizard.currentIndex--;
+                        }
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/arrow_left_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignLeft
+                                color: window.text
+                                rightPadding: window.globalPadding
+                            }
+                        }
+                    }
+
+                    Button {
+                        id: globalVersionWizardNextBtn
+                        visible: Object.keys(globalVersionWizardWindow.initialSnapshot).length > 0 && globalVersionWizard.currentIndex < globalVersionWizard.count-1
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Next"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalVersionWizardWindow.childColor : globalVersionWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: globalVersionWizard.currentIndex++
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignRight
+                                color: window.text
+                                leftPadding: window.globalPadding
+                            }
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/arrow_right_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                        }
+                    }
+
+                    Button {
+                        id: globalVersionWizardFinishBtn
+                        visible: globalVersionWizard.currentIndex >= globalVersionWizard.count-1
+                        enabled: visible
+                        padding: 0
+                        property string btnText: "Finish"
+                        Layout.fillHeight: true
+                        background: Rectangle {
+                            color: !parent.down? globalVersionWizardWindow.childColor : globalVersionWizardWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: {
+                            globalVersionWizardWindow.visible = false;
+                            const success = backend.createNewVersion(globalVersionWizardWindow.mi, globalVersionWizardWindow.initialSnapshot, globalVersionWizardVersionId.outputText, globalVersionWizardVersionType.outputText, globalVersionWizardVersionName.outputText, globalVersionWizardVersionDescription.outputText);
+                            globalMessageDialog.title = globalVersionWizardWindow.title;
+                            globalMessageDialog.text = `## ${globalVersionWizardWindow.mi.name}\n\n --- \n\n**${success? "Successfully Created" : "Failed to Create"} New Version '${globalVersionWizardVersionName.outputText} (${globalVersionWizardVersionId.outputText})'!**${success? "  \nDon't forget to commit/push to GitHub!" : ""}`;
+                            globalMessageDialog.visible = true;
+                        }
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                                MultiEffect {
+                                    anchors.fill: parent
+                                    source: parent
+                                    colorization: 1.0
+                                    colorizationColor: window.green
+                                }
+                            }
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignLeft
+                                color: window.text
+                                rightPadding: window.globalPadding
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    Window {
+        id: globalLicenseWindow
+        visible: false
+        title: "License — Modpack Update Manager"
+        width: 600
+        height: 400
+        minimumWidth: width
+        minimumHeight: height
+        maximumWidth: width
+        maximumHeight: height
+        color: window.color
+        property color childColor: window.surface0
+        property color childPressColor: window.surface1
+
+        Item {
+            width: parent.width-window.globalPadding*2
+            height: parent.height-window.globalPadding*2
+            anchors.centerIn: parent
+
+            ColumnLayout {
+                anchors.fill: parent
+
+                Column {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    Text {
+                        property bool linkHover: false
+                        leftPadding: window.globalPadding
+                        rightPadding: window.globalPadding
+                        topPadding: window.globalPadding*2
+                        Layout.fillWidth: true
+                        textFormat: Text.MarkdownText
+                        text: "## Modpack Update Manager \n\n --- \n\nThis program is licensed under the [_MIT License_](https://raw.githubusercontent.com/DatBogie/ModpackUpdateManager/refs/heads/main/LICENSE) by [_Dat Bogie_](https://github.com/DatBogie).  \nTechnologies linked into this program binary:  \n- [_QuaZip_](https://github.com/stachenov/quazip/) ([_GPL v2.1 LICENSE_](https://raw.githubusercontent.com/stachenov/quazip/refs/heads/master/COPYING/))\n- [_libgit2_](https://github.com/libgit2/libgit2) ([_GPL v2 LICENSE_](https://raw.githubusercontent.com/libgit2/libgit2/refs/heads/main/COPYING/))"
+                        color: window.text
+                        onLinkHovered: link=>{ linkHover = link !== "" }
+                        onLinkActivated: link=>{ Qt.openUrlExternally(link) }
+                        font.pointSize: window.globalTextSize
+
+                        HoverHandler {
+                            cursorShape: parent.linkHover? Qt.PointingHandCursor : Qt.ArrowCursor
+                        }
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    layoutDirection: Qt.RightToLeft
+
+                    Button {
+                        padding: 0
+                        property string btnText: "Close"
+                        background: Rectangle {
+                            color: !parent.down? globalLicenseWindow.childColor : globalLicenseWindow.childPressColor
+                            radius: window.globalBorderRadius
+                        }
+                        onClicked: globalLicenseWindow.visible = false;
+
+                        contentItem: RowLayout {
+                            height: parent.height
+                            spacing: 0
+
+                            Image {
+                                Layout.fillHeight: true
+                                Layout.preferredWidth: height
+                                scale: window.globalIconScale
+                                source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                                MultiEffect {
+                                    anchors.fill: parent
+                                    source: parent
+                                    colorization: 1.0
+                                    colorizationColor: window.red
+                                }
+                            }
+
+                            Text {
+                                text: parent.parent.btnText
+                                horizontalAlignment: Text.AlignLeft
+                                color: window.text
+                                rightPadding: window.globalPadding
+                            }
+                        }
+                    }
+
+                    Item { Layout.fillWidth: true }
+                }
+            }
+
+        }
+
     }
 
     Window {
@@ -638,6 +1181,47 @@ ApplicationWindow {
                                 spacing: 0
 
                                 Button {
+                                    id: version
+                                    visible: isCompatible && !pendingUpdate.hasUpdate
+                                    enabled: visible
+                                    Layout.fillHeight: true
+                                    background: Rectangle {
+                                        color: !parent.down? labelContainer.color : labelContainer.childPressColor
+                                        radius: window.globalBorderRadius
+                                    }
+
+                                    GlobalToolTip {
+                                        text: "Create New Version..."
+                                        visible: parent.hovered
+                                    }
+
+                                    implicitWidth: window.globalCtrlSize
+
+                                    onClicked: {
+                                        const mi = parent.genmiDict();
+                                        mi.index = index;
+                                        globalVersionWizardWindow.mi = mi;
+                                        globalVersionWizardWindow.visible = true;
+                                    }
+
+                                    contentItem: Image {
+                                        visible: false
+                                        anchors.fill: parent
+                                        scale: window.globalIconScale
+                                        source: "assets/new_label_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                    MultiEffect {
+                                        scale: parent.contentItem.scale
+                                        anchors.fill: parent.contentItem
+                                        source: parent.contentItem
+                                        colorization: 1.0
+                                        colorizationColor: window.mauve
+                                    }
+                                }
+
+                                Button {
                                     id: compat
                                     visible: !isCompatible
                                     enabled: visible
@@ -724,14 +1308,13 @@ ApplicationWindow {
                                 function updateInstance(mi) {
                                     const updateResponse = backend.qmlUpdateInstance(mi);
                                     globalMessageDialog.title = `${name} — Modpack Update Fetcher`;
-                                    globalMessageDialog.text = `## ${name} \n\n --- \n\n` + (updateResponse.success? `**Update successful!**  \n"${updateResponse.updateName}" (${updateResponse.updateId})  \n${updateResponse.updateDesc}` : "**Update failed!**  \nCheck the log for more info.");
+                                    globalMessageDialog.text = `## ${name} \n\n --- \n\n` + (updateResponse.success? `**Update successful!**  \n"${updateResponse.updateName}" (${updateResponse.updateId})  \n${updateResponse.updateDesc}` : "**Update failed!**  \nCheck the log for more info.\n\n**Note that you may have to re-import the modpack as some irreversible breaking changes may have occurred!**");
                                     globalMessageDialog.visible = true;
                                     if (updateResponse.success) {
                                         backend.setPendingUpdateProperty(index, { hasUpdate: false });
                                         backend.setCurrentVersionIdProperty(index, updateResponse.updateId);
                                         backend.setCurrentVersionTypeProperty(index, updateResponse.updateType);
                                     }
-
                                     return updateResponse;
                                 }
 
@@ -1027,7 +1610,7 @@ ApplicationWindow {
                                 contentItem: Image {
                                     anchors.fill: parent
                                     scale: window.globalIconScale
-                                    source: "assets/history_toggle_off_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                    source: "assets/delete_history_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
                                     fillMode: Image.PreserveAspectFit
                                 }
 
@@ -1058,28 +1641,28 @@ ApplicationWindow {
                             Layout.fillHeight: true
                             layoutDirection: Qt.RightToLeft
 
-                            Button {
-                                id: settingsBtn
-                                background: Rectangle {
-                                    color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
-                                    radius: window.globalBorderRadius
-                                }
+                            // Button {
+                            //     id: settingsBtn
+                            //     background: Rectangle {
+                            //         color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                            //         radius: window.globalBorderRadius
+                            //     }
 
-                                GlobalToolTip {
-                                    text: "Manage Settings..."
-                                    visible: parent.hovered
-                                }
+                            //     GlobalToolTip {
+                            //         text: "Manage Settings..."
+                            //         visible: parent.hovered
+                            //     }
 
-                                implicitWidth: parent.parent.height
-                                implicitHeight: implicitWidth
+                            //     implicitWidth: parent.parent.height
+                            //     implicitHeight: implicitWidth
 
-                                contentItem: Image {
-                                    anchors.fill: parent
-                                    scale: window.globalIconScale
-                                    source: "assets/settings_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
-                                    fillMode: Image.PreserveAspectFit
-                                }
-                            }
+                            //     contentItem: Image {
+                            //         anchors.fill: parent
+                            //         scale: window.globalIconScale
+                            //         source: "assets/settings_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                            //         fillMode: Image.PreserveAspectFit
+                            //     }
+                            // }
 
                             Button {
                                 id: licenseBtn
@@ -1087,6 +1670,7 @@ ApplicationWindow {
                                     color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
                                     radius: window.globalBorderRadius
                                 }
+                                onClicked: globalLicenseWindow.visible = true
 
                                 GlobalToolTip {
                                     text: "View Program License..."
@@ -1100,6 +1684,32 @@ ApplicationWindow {
                                     anchors.fill: parent
                                     scale: window.globalIconScale
                                     source: "assets/license_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                    fillMode: Image.PreserveAspectFit
+                                }
+                            }
+
+                            Button {
+                                id: openGitCacheBtn
+                                background: Rectangle {
+                                    color: !parent.down? parent.parent.parent.parent.parent.childColor : parent.parent.parent.parent.parent.childPressColor
+                                    radius: window.globalBorderRadius
+                                }
+                                onClicked: {
+                                    backend.openGitCache();
+                                }
+
+                                GlobalToolTip {
+                                    text: "Open GitHub Cache Directory..."
+                                    visible: parent.hovered
+                                }
+
+                                implicitWidth: parent.parent.height
+                                implicitHeight: implicitWidth
+
+                                contentItem: Image {
+                                    anchors.fill: parent
+                                    scale: window.globalIconScale
+                                    source: "assets/folder_open_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
                                     fillMode: Image.PreserveAspectFit
                                 }
                             }

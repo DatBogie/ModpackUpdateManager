@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 
 #include "modpackmodel.h"
 #include "modpackcheckupdateresponse.h"
@@ -38,10 +39,18 @@ class Backend : public QObject {
         Q_INVOKABLE void setPendingUpdateProperty(int index, QVariantMap updateResponse);
         Q_INVOKABLE void setCurrentVersionIdProperty(int index, QString versionId);
         Q_INVOKABLE void setCurrentVersionTypeProperty(int index, QString versionType);
+        Q_INVOKABLE QVariantMap recordModpackSnapshot(QVariantMap mi);
+        Q_INVOKABLE QString changelogToString(QVariantList changelog);
+        Q_INVOKABLE QVariantList genChangelog(QVariantMap mi, QVariantMap initialSnapshot);
+        Q_INVOKABLE bool createNewVersion(QVariantMap mi, QVariantMap initialSnapshot, QString versionId, QString versionType, QString versionName, QString versionDesc);
+        Q_INVOKABLE QString getGitCachePath();
+        Q_INVOKABLE void openGitCache();
     private:
         bool working = false;
         QVariantMap ModpackResponseToQVariantMap(ModpackResponseBase response);
         ModpackUpdateResponse ModpackCheckUpdateResponseToModpackUpdateResponse(ModpackCheckUpdateResponse response, bool success);
         QString getRepoPath(ModpackInstance mi);
         bool areFilesDuplicates(QFile &a, QFile &b);
+        ModpackInstance QVariantMapToModpackInstance(QVariantMap mi);
+        QVariantMap handleRecordIterFile(QDir instDir, QFileInfo fileInfo);
 };

@@ -29,18 +29,19 @@ int ModpackModel::rowCount(const QModelIndex &) const {
 
 QVariantMap ModpackModel::ModpackCheckUpdateResponseToQVariantMap(ModpackCheckUpdateResponse pu) const {
     QVariantMap cvpu = {
-        { "hasUpdate", pu.hasUpdate },
         { "updateId", pu.updateId },
         { "updateType", pu.updateType },
         { "updateName", pu.updateName },
         { "updateDesc", pu.updateDesc },
-        { "changelog", pu.changelog }
+        { "changelog", pu.changelog },
+        { "hasUpdate", pu.hasUpdate },
+        { "updateProgression", pu.updateProgression }
     };
     return cvpu;
 }
 
 ModpackCheckUpdateResponse ModpackModel::QVariantMapToModpackCheckUpdateResponse(QVariantMap cvpu) {
-    ModpackCheckUpdateResponse pu = { cvpu["updateId"].toString(), cvpu["updateType"].toString(), cvpu["updateName"].toString(), cvpu["updateDesc"].toString(), cvpu["changelog"].toList(), cvpu["hasUpdate"].toBool() };
+    ModpackCheckUpdateResponse pu = { cvpu["updateId"].toString(), cvpu["updateType"].toString(), cvpu["updateName"].toString(), cvpu["updateDesc"].toString(), cvpu["changelog"].toList(), cvpu["hasUpdate"].toBool(), cvpu["updateProgression"].toList() };
     return pu;
 }
 
