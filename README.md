@@ -27,27 +27,25 @@ Modpack Update Manager depends on the following third-party projects:
 
 ## Features (Users)
 
-1. View/update compatible [Prism Launcher](https://prismlauncher.org/) instances.
+1. [x] View/update compatible [Prism Launcher](https://prismlauncher.org/) instances.
 
-2. Manually import other Minecraft instances from other launchers.
+2. [x] Manually import Prism Launcher Minecraft instance `ZIP`s. *Please just import from Prism Launcher directly, though :)*
 
-3. View changelog/version history of compatible modpacks.
+3. [ ] View changelog/version history of compatible modpacks.
 
-4. Recieve a notification or automatically update compatible modpacks upon launching this app.
+4. [ ] Recieve a notification or automatically update compatible modpacks upon launching this app.
 
-5. Automatically launch this app upon system start.
+5. [ ] Automatically launch this app upon system start.
 
 ## Features (Modpack Authors)
 
-1. View your [Prism Launcher](https://prismlauncher.org/) instances and set up updates by linking a GitHub repository.
+1. [x] View your [Prism Launcher](https://prismlauncher.org/) instances and set up updates by linking a GitHub repository.
 
-2. Generate an initial version based on an instance's mods folder.
+2. [ ] Manually mark cosmetic/client-side mods and config files as "unimportant" to allow players to remove should they wish, even when updating to newer versions of a modpack that also include them.
 
-3. Manually mark cosmetic/client-side mods as "unimportant" to allow players to remove should they wish, even when updating to newer versions of a modpack that also include them.
+3. [x] Generate new versions and their changelogs based on changes to the `mods` & `config` folders. *Manual `git` management is required! (Just `git add . && git commit -m "<message>" && git push -u origin main`)*
 
-4. Generate new versions and their changelogs based on changes to the mods folder.
-
-5. Automatically make changes to the linked GitHub repository if an API key is provided.
+4. [ ] Automatically make changes to the linked GitHub repository if an API key is provided.
 
 ## Installation (Source)
 
