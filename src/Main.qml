@@ -885,7 +885,7 @@ ApplicationWindow {
                         topPadding: window.globalPadding*2
                         Layout.fillWidth: true
                         textFormat: Text.MarkdownText
-                        text: "## Modpack Update Manager \n\n --- \n\nThis program is licensed under the [_MIT License_](https://raw.githubusercontent.com/DatBogie/ModpackUpdateManager/refs/heads/main/LICENSE) by [_Dat Bogie_](https://github.com/DatBogie).  \nTechnologies linked into this program binary:  \n- [_QuaZip_](https://github.com/stachenov/quazip/) ([_GPL v2.1 LICENSE_](https://raw.githubusercontent.com/stachenov/quazip/refs/heads/master/COPYING/))\n- [_libgit2_](https://github.com/libgit2/libgit2) ([_GPL v2 LICENSE_](https://raw.githubusercontent.com/libgit2/libgit2/refs/heads/main/COPYING/))"
+                        text: "## Modpack Update Manager \n\n --- \n\nThis program is licensed under the [_MIT License_](https://raw.githubusercontent.com/DatBogie/ModpackUpdateManager/refs/heads/main/LICENSE) by [_Dat Bogie_](https://github.com/DatBogie).  \nTechnologies linked into this program binary:  \n- [_QuaZip_](https://github.com/stachenov/quazip/) ([_GPL v2.1 LICENSE_](https://raw.githubusercontent.com/stachenov/quazip/refs/heads/master/COPYING/))\n- [_libgit2_](https://github.com/libgit2/libgit2) ([_GPL v2 LICENSE_](https://raw.githubusercontent.com/libgit2/libgit2/refs/heads/main/COPYING/))\n- [_Qt 6_](https://www.qt.io/development/qt-framework/qt6) ([_LGPL v3_](https://doc.qt.io/qt-6/licensing.html))"
                         color: window.text
                         onLinkHovered: link=>{ linkHover = link !== "" }
                         onLinkActivated: link=>{ Qt.openUrlExternally(link) }
