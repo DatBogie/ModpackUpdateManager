@@ -9,6 +9,8 @@ Designed to avoid removing any additional mods added by players.
 > All features are currently planned, but some are not yet implemented!  
 > This is my first ever QtQuick/QML project, so I'm very much learning as I go! (Progress will be rather slow.)
 
+## [Downloads](https://github.com/DatBogie/ModpackUpdateManager/releases/latest)
+
 ## Technology
 
 Modpack Update Manager depends on the following third-party projects:
