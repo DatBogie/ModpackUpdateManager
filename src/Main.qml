@@ -1340,7 +1340,7 @@ ApplicationWindow {
                                         const response = backend.qmlCheckUpdate(mi);
                                         backend.setPendingUpdateProperty(index, response);
                                         globalMessageDialog.title = `${name} — Modpack Update Fetcher`;
-                                        globalMessageDialog.text = `## ${name}\n\n --- \n\n` + (response.hasUpdate? `**Pending update:** "${response.updateName}" (${response.updateId})  \n${response.updateDesc}` : "No updates found!");
+                                        globalMessageDialog.text = `## ${name}\n\n --- \n\n` + (response.hasUpdate? `**Pending update:** "${response.updateName}" (${response.updateId})  \n${response.updateDesc}\n\n**Changelog:**\n\n${backend.changelogToString(response.changelog)}` : "No updates found!");
                                         if (update.trulyEnabled || !response.hasUpdate) {
                                             globalMessageDialog.visible = true;
                                             return;

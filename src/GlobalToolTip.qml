@@ -4,7 +4,7 @@ import QtQuick.Effects
 
 ToolTip {
     id: root
-    visible: true
+    visible: opacity > 0
     property bool fauxVisible: false
     opacity: fauxVisible? 1 : 0
     scale: fauxVisible? 1 : .95
