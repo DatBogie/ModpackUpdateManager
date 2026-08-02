@@ -115,7 +115,7 @@ ApplicationWindow {
 
                     GlobalToolTip {
                         text: parent.text
-                        visible: globalSetupWizardNavbarTitleMs.containsMouse
+                        fauxVisible: globalSetupWizardNavbarTitleMs.containsMouse
                     }
 
                     font.pointSize: globalSetupWizardNavbar.textSize
@@ -420,7 +420,7 @@ ApplicationWindow {
 
                     GlobalToolTip {
                         text: parent.text
-                        visible: globalVersionWizardNavbarTitleMs.containsMouse
+                        fauxVisible: globalVersionWizardNavbarTitleMs.containsMouse
                     }
 
                     font.pointSize: globalVersionWizardNavbar.textSize
@@ -1172,7 +1172,7 @@ ApplicationWindow {
                                     hoverEnabled: true
                                     GlobalToolTip {
                                         text: parent.parent.text
-                                        visible: parent.containsMouse
+                                        fauxVisible: parent.containsMouse
                                     }
                                 }
                             }
@@ -1192,7 +1192,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Create New Version..."
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1233,7 +1233,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Setup Modpack Updates..."
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1263,7 +1263,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "View Details..."
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1330,7 +1330,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Check for Updates"+(update.trulyEnabled? "" : " & Update")
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1379,7 +1379,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Update" + (pendingUpdate.hasUpdate? " (Pending)" : "")
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1411,7 +1411,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Modpack Auto-Updates: "+(packEnabled? "Enabled" : "Disabled")
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1447,7 +1447,7 @@ ApplicationWindow {
 
                                     GlobalToolTip {
                                         text: "Remove from List"
-                                        visible: parent.hovered
+                                        fauxVisible: parent.hovered
                                     }
 
                                     implicitWidth: window.globalCtrlSize
@@ -1537,7 +1537,7 @@ ApplicationWindow {
 
                                 GlobalToolTip {
                                     text: "Upload Instance (.zip)..."
-                                    visible: parent.hovered
+                                    fauxVisible: parent.hovered
                                 }
 
                                 implicitWidth: parent.parent.height
@@ -1570,7 +1570,7 @@ ApplicationWindow {
 
                                 GlobalToolTip {
                                     text: "Re-fetch Instances from Prism Launcher"
-                                    visible: parent.hovered
+                                    fauxVisible: parent.hovered
                                 }
 
                                 implicitWidth: parent.parent.height
@@ -1601,7 +1601,7 @@ ApplicationWindow {
 
                                 GlobalToolTip {
                                     text: "Clear Memory of Ignored Modpacks"
-                                    visible: parent.hovered
+                                    fauxVisible: parent.hovered
                                 }
 
                                 implicitWidth: parent.parent.height
@@ -1650,7 +1650,7 @@ ApplicationWindow {
 
                             //     GlobalToolTip {
                             //         text: "Manage Settings..."
-                            //         visible: parent.hovered
+                            //         fauxVisible: parent.hovered
                             //     }
 
                             //     implicitWidth: parent.parent.height
@@ -1674,7 +1674,7 @@ ApplicationWindow {
 
                                 GlobalToolTip {
                                     text: "View Program License..."
-                                    visible: parent.hovered
+                                    fauxVisible: parent.hovered
                                 }
 
                                 implicitWidth: parent.parent.height
@@ -1700,7 +1700,7 @@ ApplicationWindow {
 
                                 GlobalToolTip {
                                     text: "Open GitHub Cache Directory..."
-                                    visible: parent.hovered
+                                    fauxVisible: parent.hovered
                                 }
 
                                 implicitWidth: parent.parent.height
@@ -1848,7 +1848,7 @@ ApplicationWindow {
                                 hoverEnabled: true
                                 GlobalToolTip {
                                     text: parent.parent.text
-                                    visible: parent.containsMouse
+                                    fauxVisible: parent.containsMouse
                                 }
                             }
                         }
