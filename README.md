@@ -7,6 +7,7 @@ Designed to avoid removing any additional mods added by players.
 
 > [!Important]
 > All features are currently planned, but some are not yet implemented!  
+> *You can tell if one is implemented by it having a checked/ticked box next to it.*  
 > This is my first ever QtQuick/QML project, so I'm very much learning as I go! (Progress will be rather slow.)
 
 ## [Downloads](https://github.com/DatBogie/ModpackUpdateManager/releases/latest)
@@ -65,8 +66,9 @@ Modpack Update Manager depends on the following third-party projects:
 
 > [!Important]
 > Some steps will ask for certain values to be manually entered by you. These are indicated by a word surrounded by `<>`s, like `<username>`.
-> - `<username>`: Your computer user's username.  
-> - `<version>`: The version of Qt you installed via Qt Maintenance Tool. Eg. `6.11.1`.  
+>
+> - `<username>`: Your computer user's username.
+> - `<version>`: The version of Qt you installed via Qt Maintenance Tool. Eg. `6.11.1`.
 > - `<year>`: (**Windows Only**) The year of the Visual Studio compiler you're using. Eg. `2022`.
 
 ### Install vcpkg
@@ -106,60 +108,77 @@ Modpack Update Manager depends on the following third-party projects:
     ```
 
     **Linux**
-   
+
     ```sh
     cd
     git clone --recursive https://github.com/DatBogie/ModpackUpdateManager.git
     cd ModpackManager/src
     ```
 
-3. Open in Qt Creator (`File > Open File or Project...`, select `ModpackUpdateManager/src/CMakeLists.txt` from your user directory)
+2. Open in Qt Creator (`File > Open File or Project...`, select `ModpackUpdateManager/src/CMakeLists.txt` from your user directory)
 
-4. ***If on Windows***, check only `Desktop Qt <version> MSVC<year> 64bit` and its corresponding check `Release`. ***Otherwise***, just pick one of them and check only `Release` for it.
+3. ***If on Windows***, check only `Desktop Qt <version> MSVC<year> 64bit` and its corresponding check `Release`. ***Otherwise***, just pick one of them and check only `Release` for it.
 
-5.  Hover over `Desktop Qt <version> MSVC<year> 64bit` (or whichever one you picked) and click `Manage...`.
+4. Hover over `Desktop Qt <version> MSVC<year> 64bit` (or whichever one you picked) and click `Manage...`.
 
-6.  Scroll down and click the `Change...` button next to `CMake Configuration:`
+5. Scroll down and click the `Change...` button next to `CMake Configuration:`
 
-7.  Append one of the following and click `Apply` and `OK`, then click `Apply` and `OK` again:
+6. Append one of the following and click `Apply` and `OK`, then click `Apply` and `OK` again:
 
     **Windows**
 
-    ```
+    ```plaintext
     -DCMAKE_TOOLCHAIN_FILE=C:/Users/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
     ```
 
     **Linux**
 
-    ```
+    ```plaintext
     -DCMAKE_TOOLCHAIN_FILE=/home/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
     ```
 
-8. Click `Configure Project`, then wait for it to finish `Configuring src` and `Indexing src...`
+7. Click `Configure Project`, then wait for it to finish `Configuring src` and `Indexing src...`
 
-9. Press `CTRL+B` or click the hammer icon in the bottom left
+8. Press `CTRL+B` or click the hammer icon in the bottom left
 
-10. Open your file manager and navigate to `$HOME/ModpackUpdateManager/src/build` and open the folder inside
+9. Open your file manager and navigate to `$HOME/ModpackUpdateManager/src/build` and open the folder inside
 
-11. ***If you're on linux, you're done! The binary is called `appsrc`. You may stop following these instructions!***
+10. *If you're on Linux, then you're now done! The binary is called `appsrc`; feel free to rename it to anything. Please ignore the following instructions, as they're only meant for Windows!*
 
-12. Make a new folder called `dist`, and copy `appsrc.exe`, `git2.dll`, `pcre.dll`, and `z.dll` into it.
+---
 
-13. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
+From here, you can either run the packaging script, or manually package it (doing what the script does manually).  
+I'd recommend running the script *unless your Qt folder **isn't** located at `C:\Qt`!*
 
-14. In a PowerShell terminal, type the following, then press `TAB`:
+#### Using `package.ps1`
+
+1. In File Explorer, navigate back up to `$HOME\ModpackUpdateManager\src\`.
+
+2. Right-click on `package.ps1` and click `Run with PowerShell`.
+
+3. Once the script finishes running, you'll be able to find the compiled program in the directory shown by the script!
+
+4. Close the PowerShell window.
+
+#### Packaging Manually
+
+1. Make a new folder called `dist`, and copy `appsrc.exe`, `git2.dll`, `pcre.dll`, and `z.dll` into it.
+
+2. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
+
+3. In a PowerShell terminal, type the following, then press `Tab`:
 
     ```powershell
-    cd $HOME\ModpackUpdateManager\src\build\
+    cd (ls -Directory $HOME\ModpackUpdateManager\src\build)
     ```
-    
-15. Then, type `dist` and press `Enter`
 
-16. Enter the following and press `Enter`:
+4. Enter the following and press `Enter`, clicking `Paste anyway` if a warning pops up:
 
     ```powershell
     C:\Qt\<version>\msvc<year>_64\bin\windeployqt.exe --qmldir C:/Qt/<version>/msvc<year>_64/bin/qml .\appsrc.exe
-    cp C:\Qt\<version>\msvc<year>_64\bin\Qt6Core5Compat.dll .\
+    cp C:\Qt\<version>\msvc<year>_64\bin\Qt6Core5Compat.dll .
     ```
 
-17. That's it! Unlike on Linux, though, you have to move the entire `dist` folder, not just the executable. Feel free to rename both, though! Just don't touch the `.dll`s.
+    *If, for whatever reason, your Qt folder isn't located at `C:\Qt`, then change `C:\Qt` above to wherever it is!*
+
+That's it! Unlike on Linux, though, you have to keep the entire `dist` folder intact. Feel free to rename the folder and/or the executable, though!
