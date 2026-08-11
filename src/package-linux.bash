@@ -5,8 +5,15 @@ onExit() {
 
 trap onExit EXIT
 
-cd build &&
+REPO_ROOT_DIR="$PWD" &&
+	cd build &&
 	cd -- */ &&
-	echo "Renaming binary..." &&
-	mv appsrc ModpackUpdateManager &&
+	mkdir dist &&
+	echo "Copying binary to $PWD/dist..." &&
+	cp appsrc dist/ModpackUpdateManager &&
+	cd dist &&
+	printf "[Desktop Entry]\nType=Application\nName=Modpack Update Manager\nExec=ModpackUpdateManager\nCategories=Utility;" > ../ModpackUpdateManager.desktop &&
+	export QML_SOURCES_PATHS="$REPO_ROOT_DIR" &&
+	echo "Bundling Qt/QML library files via linuxdeploy/linuxdeploy-plugin-qt..." &&
+	linuxdeploy --appdir AppDir -e ModpackUpdateManager -d ../ModpackUpdateManager.desktop --plugin qt --output appimage &&
 	echo "Done!"
