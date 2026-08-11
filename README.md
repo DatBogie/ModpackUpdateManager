@@ -1,6 +1,6 @@
 # ModpackUpdateManager
 
-A cross-platform QtQuick app to non-destructively update Minecraft modpacks.  
+A cross-platform QtQuick app for non-destructively updating Minecraft modpacks.  
 Provides services for both users and modpack authors.
 
 Designed to avoid removing any additional mods added by players.
