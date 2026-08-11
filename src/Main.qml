@@ -334,15 +334,21 @@ ApplicationWindow {
                             height: parent.height
                             spacing: 0
 
-                            Image {
+                            Item {
                                 Layout.fillHeight: true
                                 Layout.preferredWidth: height
-                                scale: window.globalIconScale
-                                source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
-                                fillMode: Image.PreserveAspectFit
-                                MultiEffect {
+
+                                Image {
+                                    id: globalSetupWizardFinishBtnIcon
                                     anchors.fill: parent
-                                    source: parent
+                                    scale: window.globalIconScale
+                                    source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                    fillMode: Image.PreserveAspectFit
+                                }
+
+                                MultiEffect {
+                                    anchors.fill: globalSetupWizardFinishBtnIcon
+                                    source: globalSetupWizardFinishBtnIcon
                                     colorization: 1.0
                                     colorizationColor: window.green
                                 }
@@ -914,15 +920,21 @@ ApplicationWindow {
                             height: parent.height
                             spacing: 0
 
-                            Image {
+                            Item {
                                 Layout.fillHeight: true
                                 Layout.preferredWidth: height
-                                scale: window.globalIconScale
-                                source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
-                                fillMode: Image.PreserveAspectFit
-                                MultiEffect {
+
+                                Image {
+                                    id: globalLicenseWindowCloseIcon
                                     anchors.fill: parent
-                                    source: parent
+                                    scale: window.globalIconScale
+                                    source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                    fillMode: Image.PreserveAspectFit
+                                }
+
+                                MultiEffect {
+                                    anchors.fill: globalLicenseWindowCloseIcon
+                                    source: globalLicenseWindowCloseIcon
                                     colorization: 1.0
                                     colorizationColor: window.red
                                 }
@@ -1018,15 +1030,21 @@ ApplicationWindow {
                         height: parent.height
                         spacing: 0
 
-                        Image {
+                        Item {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
-                            scale: window.globalIconScale
-                            source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
-                            fillMode: Image.PreserveAspectFit
-                            MultiEffect {
+
+                            Image {
+                                id: globalMessageDialogOKBtnIcon
                                 anchors.fill: parent
-                                source: parent
+                                scale: window.globalIconScale
+                                source: "assets/check_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            MultiEffect {
+                                anchors.fill: globalMessageDialogOKBtn
+                                source: globalMessageDialogOKBtn
                                 colorization: 1.0
                                 colorizationColor: window.green
                             }
@@ -1058,15 +1076,21 @@ ApplicationWindow {
                         height: parent.height
                         spacing: 0
 
-                        Image {
+                        Item {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
-                            scale: window.globalIconScale
-                            source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
-                            fillMode: Image.PreserveAspectFit
-                            MultiEffect {
+
+                            Image {
                                 anchors.fill: parent
-                                source: parent
+                                id: globalMessageDialogCloseBtnIcon
+                                scale: window.globalIconScale
+                                source: "assets/close_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg"
+                                fillMode: Image.PreserveAspectFit
+                            }
+
+                            MultiEffect {
+                                anchors.fill: globalMessageDialogCloseBtnIcon
+                                source: globalMessageDialogCloseBtnIcon
                                 colorization: 1.0
                                 colorizationColor: window.red
                             }
