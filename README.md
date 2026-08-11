@@ -33,7 +33,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 1. [x] View/update compatible [Prism Launcher](https://prismlauncher.org/) instances.
 
-2. [x] Manually import Prism Launcher Minecraft instance `ZIP`s. *Please just import from Prism Launcher directly, though :)*
+2. [x] Manually import Prism Launcher Minecraft instance `ZIP`s. *Please just import from Prism Launcher directly, though! :)*
 
 3. [ ] View changelog/version history of compatible modpacks.
 
@@ -47,7 +47,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 2. [ ] Manually mark cosmetic/client-side mods and config files as "unimportant" to allow players to remove should they wish, even when updating to newer versions of a modpack that also include them.
 
-3. [x] Generate new versions and their changelogs based on changes to the `mods` & `config` folders. *Manual `git` management is required! (Just `git add . && git commit -m "<message>" && git push -u origin main`)*
+3. [x] Generate new versions and their changelogs based on changes to the `mods` & `config` folders. *Manual `git` management is required! (Just `git add . && git commit -m "<message>" && git push -u origin main`.)*
 
 4. [ ] Automatically make changes to the linked GitHub repository if an API key is provided.
 
@@ -73,7 +73,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 ### Install vcpkg
 
-1. Clone the [vcpkg repository](https://github.com/microsoft/vcpkg).
+1. Clone the [vcpkg repository](https://github.com/microsoft/vcpkg):
 
     ```sh
     cd
@@ -81,7 +81,7 @@ Modpack Update Manager depends on the following third-party projects:
     cd vcpkg
     ```
 
-2. Bootstrap vcpkg.
+2. Bootstrap vcpkg;
 
     **Windows**
 
@@ -89,7 +89,7 @@ Modpack Update Manager depends on the following third-party projects:
     .\bootstrap-vcpkg.bat
     ```
 
-    **Linux**
+    **Linux/macOS**
 
     ```sh
     ./bootstrap-vcpkg.sh
@@ -97,7 +97,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 ### Install Modpack Update Manager
 
-1. Clone Modpack Update Manager
+1. Clone Modpack Update Manager:
 
     **Windows**
 
@@ -107,7 +107,7 @@ Modpack Update Manager depends on the following third-party projects:
     cd ModpackManager\src
     ```
 
-    **Linux**
+    **Linux/macOS**
 
     ```sh
     cd
@@ -115,13 +115,13 @@ Modpack Update Manager depends on the following third-party projects:
     cd ModpackManager/src
     ```
 
-2. Open in Qt Creator (`File > Open File or Project...`, select `ModpackUpdateManager/src/CMakeLists.txt` from your user directory)
+2. Open in Qt Creator (`File > Open File or Project...`, select `ModpackUpdateManager/src/CMakeLists.txt` from your user directory).
 
-3. ***If on Windows***, check only `Desktop Qt <version> MSVC<year> 64bit` and its corresponding check `Release`. ***Otherwise***, just pick one of them and check only `Release` for it.
+3. Make sure only one kit named something like `Desktop Qt...` is selected alongside only selecting its corresponding `Release` profile.
 
-4. Hover over `Desktop Qt <version> MSVC<year> 64bit` (or whichever one you picked) and click `Manage...`.
+4. Hover over your selected kit and click `Manage...`.
 
-5. Scroll down and click the `Change...` button next to `CMake Configuration:`
+5. Scroll down and click the `Change...` button next to `CMake Configuration:`.
 
 6. Append one of the following and click `Apply` and `OK`, then click `Apply` and `OK` again:
 
@@ -137,13 +137,39 @@ Modpack Update Manager depends on the following third-party projects:
     -DCMAKE_TOOLCHAIN_FILE=/home/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
     ```
 
-7. Click `Configure Project`, then wait for it to finish `Configuring src` and `Indexing src...`
+    **macOS**
 
-8. Press `CTRL+B` or click the hammer icon in the bottom left
+    ```plaintext
+    -DCMAKE_TOOLCHAIN_FILE=/Users/<username>/vcpkg/scripts/buildsystems/vcpkg.cmake
+    ```
 
-9. Open your file manager and navigate to `$HOME/ModpackUpdateManager/src/build` and open the folder inside
+7. Click `Configure Project`, then wait for it to finish `Configuring src` and `Indexing src...`.
 
-10. *If you're on Linux, then you're now done! The binary is called `appsrc`; feel free to rename it to anything. Please ignore the following instructions, as they're only meant for Windows!*
+8. Press `CTRL+B` or click the hammer icon in the bottom left.
+
+9. If you're ***not*** on Windows, in `~/ModpackUpdateManager/src` run:
+
+    **Linux**
+
+    ```sh
+    ./package-linux.bash
+    ```
+
+    **macOS**
+
+    ```sh
+    ./package-macos.bash
+    ```
+
+10. If you're ***not*** on Windows, run:
+
+    ```sh
+    cd build && -- */
+    ```
+
+    You'll then find your executable at `./ModpackUpdateManager` or `./ModpackUpdateManager.app` for Linux/macOS respectively!
+
+    *You are now finished and no longer need to follow the proceeding instructions, as they are only for Windows!*
 
 ---
 
@@ -152,7 +178,7 @@ I'd recommend running the script *unless your Qt folder **isn't** located at `C:
 
 #### Using `package.ps1`
 
-1. In File Explorer, navigate back up to `$HOME\ModpackUpdateManager\src\`.
+1. In File Explorer, navigate to `$HOME\ModpackUpdateManager\src\`.
 
 2. Right-click on `package.ps1` and click `Run with PowerShell`.
 
@@ -162,17 +188,19 @@ I'd recommend running the script *unless your Qt folder **isn't** located at `C:
 
 #### Packaging Manually
 
-1. Make a new folder called `dist`, and copy `appsrc.exe`, `git2.dll`, `pcre.dll`, and `z.dll` into it.
+1. In File Explorer, open `$HOME\ModpackUpdateManager\src\build` and open the first/only folder in there.
 
-2. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
+2. Make a new folder called `dist`, and copy `appsrc.exe`, `git2.dll`, `pcre.dll`, and `z.dll` into it.
 
-3. In a PowerShell terminal, type the following, then press `Tab`:
+3. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
+
+4. In a PowerShell terminal, type the following, then press `Tab`:
 
     ```powershell
     cd (ls -Directory $HOME\ModpackUpdateManager\src\build)
     ```
 
-4. Enter the following and press `Enter`, clicking `Paste anyway` if a warning pops up:
+5. Enter the following and press `Enter`, clicking `Paste anyway` if a warning pops up:
 
     ```powershell
     C:\Qt\<version>\msvc<year>_64\bin\windeployqt.exe --qmldir C:/Qt/<version>/msvc<year>_64/bin/qml .\appsrc.exe
@@ -181,4 +209,4 @@ I'd recommend running the script *unless your Qt folder **isn't** located at `C:
 
     *If, for whatever reason, your Qt folder isn't located at `C:\Qt`, then change `C:\Qt` above to wherever it is!*
 
-That's it! Unlike on Linux, though, you have to keep the entire `dist` folder intact. Feel free to rename the folder and/or the executable, though!
+    *You are now finished!*
