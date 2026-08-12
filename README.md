@@ -10,7 +10,10 @@ Designed to avoid removing any additional mods added by players.
 > *You can tell if one is implemented by it having a checked/ticked box next to it.*  
 > This is my first ever QtQuick/QML project, so I'm very much learning as I go! (Progress will be rather slow.)
 
-## [Downloads](https://github.com/DatBogie/ModpackUpdateManager/releases/latest)
+## [Take Me to the Downloads!](https://github.com/DatBogie/ModpackUpdateManager/releases/latest)
+
+*If you just want to use the app, click the link above!*  
+You likely don't need to see the rest of this.
 
 ## Technology
 
