@@ -55,7 +55,6 @@ Modpack Update Manager depends on the following third-party projects:
 
 ### Prerequisites
 
-- [CMake ≥3.16](https://cmake.org/download/)
 - [Git](https://git-scm.com/install/)
 - Windows: [Visual Studio ≥2022](https://visualstudio.microsoft.com/downloads/)
 - Linux: GCC
@@ -65,11 +64,11 @@ Modpack Update Manager depends on the following third-party projects:
 <sup>\**An account is required, though this is the best way to install a specific version of Qt on any platform.*</sup>
 
 > [!Important]
-> Some steps will ask for certain values to be manually entered by you. These are indicated by a word surrounded by `<>`s, like `<username>`.
+> Some steps will ask for certain values to be manually entered by you. These are indicated by a word surrounded by `<>`s, like `<username>`:
 >
-> - `<username>`: Your computer user's username.
+> - `<username>`: Your computer username.
 > - `<version>`: The version of Qt you installed via Qt Maintenance Tool. Eg. `6.11.1`.
-> - `<year>`: (**Windows Only**) The year of the Visual Studio compiler you're using. Eg. `2022`.
+> - `<year>`: The year of the Visual Studio compiler you're using. Eg. `2022`.
 
 ### Install vcpkg
 
@@ -123,7 +122,7 @@ Modpack Update Manager depends on the following third-party projects:
 
 5. Scroll down and click the `Change...` button next to `CMake Configuration:`.
 
-6. Append one of the following and click `Apply` and `OK`, then click `Apply` and `OK` again:
+6. Append one of the following, *making sure to replace `<username>` as specified above,* and click `Apply` and `OK`, then click `Apply` and `OK` again:
 
     **Windows**
 
@@ -164,7 +163,7 @@ Modpack Update Manager depends on the following third-party projects:
 10. If you're ***not*** on Windows, run:
 
     ```sh
-    cd build && -- */
+    cd build && cd -- */
     ```
 
     You'll then find your executable at `./ModpackUpdateManager` or `./ModpackUpdateManager.app` for Linux/macOS respectively!
@@ -194,13 +193,13 @@ I'd recommend running the script *unless your Qt folder **isn't** located at `C:
 
 3. Open `external\quazip\quazip` and copy `bz2.dll` and `quazip1-qt6.dll` into the same `dist` folder.
 
-4. In a PowerShell terminal, type the following, then press `Tab`:
+4. In a PowerShell terminal, paste in the following, then press `Enter`:
 
     ```powershell
     cd (ls -Directory $HOME\ModpackUpdateManager\src\build)
     ```
 
-5. Enter the following and press `Enter`, clicking `Paste anyway` if a warning pops up:
+5. Enter the following and press `Enter`, *making sure to replace `<version>` and `<year>` as specified above:*
 
     ```powershell
     C:\Qt\<version>\msvc<year>_64\bin\windeployqt.exe --qmldir C:/Qt/<version>/msvc<year>_64/bin/qml .\appsrc.exe
