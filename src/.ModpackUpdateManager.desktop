@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Modpack Update Manager
+Icon=icon
+Comment=A cross-platform QtQuick app for non-destructively updating Minecraft modpacks
+Exec=ModpackUpdateManager
+Terminal=false
+Categories=Utility;
